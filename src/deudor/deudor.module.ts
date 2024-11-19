@@ -7,5 +7,6 @@ import { DeudorController } from './deudor.controller';
   providers: [DeudorService],
   imports: [TypeOrmModule.forFeature([DeudorEntity])],
   controllers: [DeudorController],
+  exports: [DeudorService],
 })
 export class DeudorModule {}
