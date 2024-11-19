@@ -1,5 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { DeudorEntity } from '../deudor/deudor.entity';
+import { PrestamistaEntity } from 'src/prestamista/prestamista.entity';
 
 @Entity()
 export class PrestamoEntity {
@@ -23,4 +24,7 @@ export class PrestamoEntity {
 
   @ManyToOne(() => DeudorEntity, deudor => deudor.id)
     deudor: DeudorEntity;
+
+  @ManyToOne(() => PrestamistaEntity, prestamista => prestamista.prestamos)
+    prestamista: PrestamistaEntity;
 }
