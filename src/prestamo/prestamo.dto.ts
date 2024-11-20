@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import { IsBoolean, IsDate, IsInt, IsNotEmpty, IsNumber, IsString, IsUrl } from 'class-validator';
 export class PrestamoDto {
 
@@ -9,16 +10,20 @@ export class PrestamoDto {
     @IsNotEmpty()
     interes: number;
 
-    @IsDate()
+    @Transform(({ value }) => new Date(value))
     @IsNotEmpty()
-    fechaInicio: Date;
+    fechainicio: Date;
 
-    @IsDate()
+    @Transform(({ value }) => new Date(value))
     @IsNotEmpty()
-    fechaFin: Date;
+    fechafin: Date;
 
     @IsBoolean()
     @IsNotEmpty()
     pagado: Boolean;
+
+    @IsString()
+    @IsNotEmpty()
+    deudorId: string;
 
 }
