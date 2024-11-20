@@ -16,25 +16,25 @@ export class DeudorController {
     }
 
     @Get(':deudorId')
-    async findOne(@Param('deudorId') deudorId: number) {
+    async findOne(@Param('deudorId') deudorId: string) {
         return await this.deudorService.findOne(deudorId);
     }
 
     @Post()
     async create(@Body() deudorDto: DeudorDto) {
-        const museum: DeudorEntity = plainToInstance(DeudorEntity, deudorDto);
-        return await this.deudorService.create(museum);
+        const deudor: DeudorEntity = plainToInstance(DeudorEntity, deudorDto);
+        return await this.deudorService.create(deudor);
     }
 
     @Put(':deudorId')
-    async update(@Param('deudorId') deudorId: number, @Body() deudorDto: DeudorDto) {
-        const museum: DeudorEntity = plainToInstance(DeudorEntity, deudorDto);
-        return await this.deudorService.update(deudorId, museum);
+    async update(@Param('deudorId') deudorId: string, @Body() deudorDto: DeudorDto) {
+        const deudor: DeudorEntity = plainToInstance(DeudorEntity, deudorDto);
+        return await this.deudorService.update(deudorId, deudor);
     }
 
     @Delete(':deudorId')
     @HttpCode(204)
-    async delete(@Param('deudorId') deudorId: number) {
+    async delete(@Param('deudorId') deudorId: string) {
         return await this.deudorService.delete(deudorId);
     }
 }

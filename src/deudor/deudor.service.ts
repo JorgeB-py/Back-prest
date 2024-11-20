@@ -15,7 +15,7 @@ export class DeudorService {
     async findAll(): Promise<DeudorEntity[]> {
         return await this.deudorRepository.find({ relations: ["prestamos"] });
     }
-    async findOne(id: number): Promise<DeudorEntity> {
+    async findOne(id: string): Promise<DeudorEntity> {
         const deudor: DeudorEntity = await this.deudorRepository.findOne({where: {id}, relations: ["prestamos"] } );
         if (!deudor)
           throw new BusinessLogicException("The deudor with the given id was not found", BusinessError.NOT_FOUND);
@@ -25,14 +25,14 @@ export class DeudorService {
     async create(deudor: DeudorEntity): Promise<DeudorEntity> {
         return await this.deudorRepository.save(deudor);
     }
-    async update(id: number, deudor: DeudorEntity): Promise<DeudorEntity> {
+    async update(id: string, deudor: DeudorEntity): Promise<DeudorEntity> {
         const persistedDeudor: DeudorEntity = await this.deudorRepository.findOne({where:{id}});
         if (!persistedDeudor)
           throw new BusinessLogicException("The deudor with the given id was not found", BusinessError.NOT_FOUND);
         
         return await this.deudorRepository.save({...persistedDeudor, ...deudor});
     }
-    async delete(id: number) {
+    async delete(id: string) {
         const deudor: DeudorEntity = await this.deudorRepository.findOne({where:{id}});
         if (!deudor)
           throw new BusinessLogicException("The deudor with the given id was not found", BusinessError.NOT_FOUND);

@@ -4,7 +4,7 @@ import { DeudorEntity } from '../deudor/deudor.entity';
 @Entity()
 export class PrestamoEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: string;
 
   @Column()
   monto: number;
@@ -13,10 +13,10 @@ export class PrestamoEntity {
   interes: number;
 
   @Column()
-  fechaInicio: Date;
+  fechainicio: Date;
 
   @Column()
-  fechaFin: Date;
+  fechafin: Date;
 
   @Column()
   pagado: boolean;

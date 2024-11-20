@@ -3,7 +3,7 @@ export class DeudorDto {
 
     @IsString()
     @IsNotEmpty()
-    readonly nombreCompleto: string;
+    readonly nombrecompleto: string;
 
     @IsString()
     @IsNotEmpty()

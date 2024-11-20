@@ -11,25 +11,35 @@ import { PrestamoEntity } from 'src/prestamo/prestamo.entity';
 export class DeudorPrestamoController {
     constructor(private readonly deudorPrestamoService: DeudorPrestamoService) { }
     @Post(':deudorId/prestamos/:prestamoId')
-    async addPrestamoDeudor(@Param('deudorId') deudorId: number, @Param('prestamoId') prestamoId: number) {
+    async addPrestamoDeudor(@Param('deudorId') deudorId: string, @Param('prestamoId') prestamoId: string) {
         return await this.deudorPrestamoService.addPrestamoDeudor(deudorId, prestamoId);
     }
     @Get(':deudorId/prestamos/:prestamoId')
-    async findPrestamoBydeudorIdprestamoId(@Param('deudorId') deudorId: number, @Param('prestamoId') prestamoId: number) {
+    async findPrestamoBydeudorIdprestamoId(@Param('deudorId') deudorId: string, @Param('prestamoId') prestamoId: string) {
         return await this.deudorPrestamoService.findPrestamoByDeudorIDPrestamoID(deudorId, prestamoId);
     }
     @Get(':deudorId/prestamos')
-    async findprestamosBydeudorId(@Param('deudorId') deudorId: number) {
+    async findprestamosBydeudorId(@Param('deudorId') deudorId: string) {
         return await this.deudorPrestamoService.findPrestamosByDeudorId(deudorId);
     }
     @Put(':deudorId/prestamos')
-    async associateprestamosDeudor(@Body() prestamosDto: PrestamoDto[], @Param('deudorId') deudorId: number) {
+    async associateprestamosDeudor(@Body() prestamosDto: PrestamoDto[], @Param('deudorId') deudorId: string) {
         const prestamos = plainToInstance(PrestamoEntity, prestamosDto)
         return await this.deudorPrestamoService.associatePrestamosDeudor(deudorId, prestamos);
     }
+    @Put(':deudorId/prestamos/:prestamoId')
+    async associateprestamoDeudor(@Body() prestamoDto: PrestamoDto, @Param('deudorId') deudorId: string, @Param('prestamoId') prestamoId: string) {
+        const prestamo = plainToInstance(PrestamoEntity, prestamoDto)
+        return await this.deudorPrestamoService.associatePrestamoDeudor(deudorId, prestamoId ,prestamo);
+    }
     @Delete(':deudorId/prestamos/:prestamoId')
     @HttpCode(204)
-    async deletePrestamoDeudor(@Param('deudorId') deudorId: number, @Param('prestamoId') prestamoId: number) {
+    async deletePrestamoDeudor(@Param('deudorId') deudorId: string, @Param('prestamoId') prestamoId: string) {
         return await this.deudorPrestamoService.deletePrestamoDeudor(deudorId, prestamoId);
+    }
+    @Delete(':deudorId/prestamos')
+    @HttpCode(204)
+    async deletePrestamosDeudor(@Param('deudorId') deudorId: string) {
+        return await this.deudorPrestamoService.deletePrestamosDeudor(deudorId);
     }
 }

@@ -15,7 +15,7 @@ export class PrestamoService {
     async findAll(): Promise<PrestamoEntity[]> {
         return await this.prestamoRepository.find({ relations: ["deudor"] });
     }
-    async findOne(id: number): Promise<PrestamoEntity> {
+    async findOne(id: string): Promise<PrestamoEntity> {
         const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({where: {id}, relations: ["deudor"] } );
         if (!prestamo)
           throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND);
@@ -25,14 +25,14 @@ export class PrestamoService {
     async create(prestamo: PrestamoEntity): Promise<PrestamoEntity> {
         return await this.prestamoRepository.save(prestamo);
     }
-    async update(id: number, prestamo: PrestamoEntity): Promise<PrestamoEntity> {
+    async update(id: string, prestamo: PrestamoEntity): Promise<PrestamoEntity> {
         const persistedprestamo: PrestamoEntity = await this.prestamoRepository.findOne({where:{id}});
         if (!persistedprestamo)
           throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND);
         
         return await this.prestamoRepository.save({...persistedprestamo, ...prestamo});
     }
-    async delete(id: number) {
+    async delete(id: string) {
         const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({where:{id}});
         if (!prestamo)
           throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND);
