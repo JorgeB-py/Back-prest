@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { DeudorEntity } from '../deudor/deudor.entity';
-import { PrestamistaEntity } from 'src/prestamista/prestamista.entity';
+import { PrestamistaEntity } from '../prestamista/prestamista.entity';
 
 @Entity()
 export class PrestamoEntity {

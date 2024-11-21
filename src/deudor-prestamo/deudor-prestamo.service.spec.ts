@@ -55,6 +55,7 @@ describe('DeudorPrestamoService', () => {
     interes: 5,
     pagado: false,
     deudor: mockDeudor,
+    prestamista:null
   };
 
   describe('addPrestamoDeudor', () => {
