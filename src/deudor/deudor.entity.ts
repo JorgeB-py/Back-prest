@@ -1,13 +1,13 @@
-import { PrestamoEntity } from 'src/prestamo/prestamo.entity';
+import { PrestamoEntity } from '../prestamo/prestamo.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class DeudorEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: number;
+  @PrimaryGeneratedColumn()
+  id: string;
 
   @Column()
-  nombreCompleto: string;
+  nombrecompleto: string;
 
   @Column()
   direccion: string;
