@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { DeudorEntity } from './deudor.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
+import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';   
 
 
 
@@ -17,9 +17,9 @@ export class DeudorService {
     }
     async findOne(id: string): Promise<DeudorEntity> {
         const deudor: DeudorEntity = await this.deudorRepository.findOne({where: {id}, relations: ["prestamos"] } );
-        if (!deudor)
-          throw new BusinessLogicException("The deudor with the given id was not found", BusinessError.NOT_FOUND);
-   
+        if (!deudor){
+            throw new BusinessLogicException("The deudor with the given id was not found", BusinessError.NOT_FOUND);
+        }
         return deudor;
     }
     async create(deudor: DeudorEntity): Promise<DeudorEntity> {
