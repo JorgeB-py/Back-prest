@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeudorEntity } from 'src/deudor/deudor.entity';
-import { PrestamoEntity } from 'src/prestamo/prestamo.entity';
-import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
+import { DeudorEntity } from '../deudor/deudor.entity';
+import { PrestamoEntity } from '../prestamo/prestamo.entity';
+import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
 import { Repository } from 'typeorm';
 
 @Injectable()

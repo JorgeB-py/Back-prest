@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
 import { PrestamoService } from './prestamo.service';
 import { UseInterceptors } from '@nestjs/common';
-import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors/business-errors.interceptor';
+import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors.interceptor';
 import { PrestamoEntity } from './prestamo.entity';
 import { PrestamoDto } from './prestamo.dto';
 import { plainToInstance } from 'class-transformer';

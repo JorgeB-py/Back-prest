@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put } from '@nestjs/common';
 import { DeudorService } from './deudor.service';
 import { UseInterceptors } from '@nestjs/common';
-import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors/business-errors.interceptor';
+import { BusinessErrorsInterceptor } from '../shared/interceptors/business-errors.interceptor';
 import { DeudorEntity } from './deudor.entity';
 import { DeudorDto } from './deudor.dto';
 import { plainToInstance } from 'class-transformer';

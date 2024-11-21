@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseInterceptors } from '@nestjs/common';
-import { BusinessErrorsInterceptor } from 'src/shared/interceptors/business-errors/business-errors.interceptor';
+import { BusinessErrorsInterceptor } from '../shared/interceptors/business-errors.interceptor';
 import { DeudorPrestamoService } from './deudor-prestamo.service';
 import { plainToInstance } from 'class-transformer';
-import { PrestamoDto } from 'src/prestamo/prestamo.dto';
-import { PrestamoEntity } from 'src/prestamo/prestamo.entity';
+import { PrestamoDto } from '../prestamo/prestamo.dto';
+import { PrestamoEntity } from '../prestamo/prestamo.entity';
 
 @Controller('deudor')
 @UseInterceptors(BusinessErrorsInterceptor)
