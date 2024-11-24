@@ -17,7 +17,7 @@ import jwtConstants from '../shared/security/constants';
          signOptions: { expiresIn: jwtConstants.JWT_EXPIRES_IN },
        })
      ],
-   providers: [AuthService, UserService, JwtService, LocalStrategy, JwtStrategy],
+   providers: [AuthService, UserService, LocalStrategy, JwtStrategy],
    exports: [AuthService]
   
 })

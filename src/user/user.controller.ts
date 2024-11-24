@@ -7,17 +7,17 @@ import { Roles } from './roles.decorator';
 @Controller('users')
 export class UserController {
 
-   constructor(private readonly authService: AuthService){}
-   @UseGuards(LocalAuthGuard)
-   @Post('login')
-   async login(@Req() req) {
-       return this.authService.login(req);
-   }
+    constructor(private readonly authService: AuthService) { }
+    @UseGuards(LocalAuthGuard)
+    @Post('login')
+    async login(@Req() req) {
+        return this.authService.login(req);
+    }
 
-   @UseGuards(LocalAuthGuard)
-   @Roles(Role.ADMIN)
+    @UseGuards(LocalAuthGuard)
+    @Roles(Role.ADMIN)
     @Post('/')
-   async findAll() {
-         return await this.authService.findAll();
-   }
+    async findAll() {
+        return await this.authService.findAll();
+    }
 }

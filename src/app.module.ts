@@ -41,6 +41,6 @@ import { PrestamistaRecursoModule } from './prestamista-recurso/prestamista-recu
     PrestamistaRecursoModule,
   ],
   controllers: [AppController],
-  providers: [AppService, JwtAuthGuard, LocalAuthGuard],
+  providers: [AppService],
 })
 export class AppModule {}
