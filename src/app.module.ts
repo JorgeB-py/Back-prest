@@ -11,6 +11,10 @@ import { PrestamistaModule } from './prestamista/prestamista.module';
 import { PrestamistaEntity } from './prestamista/prestamista.entity';
 import { RecursoModule } from './recurso/recurso.module';
 import { RecursoEntity } from './recurso/recurso.entity';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
+import { JwtAuthGuard } from './auth/guards/jwt-auth/jwt-auth.guard';
+import { LocalAuthGuard } from './auth/guards/local-auth/local-auth.guard';
 
 @Module({
   imports: [DeudorModule, PrestamoModule,
@@ -24,13 +28,15 @@ import { RecursoEntity } from './recurso/recurso.entity';
       entities: [PrestamoEntity, DeudorEntity, PrestamistaEntity, RecursoEntity],
       dropSchema: true,
       synchronize: true,
-      keepConnectionAlive: true
+      keepConnectionAlive: true,
     }),
     DeudorPrestamoModule,
     PrestamistaModule,
     RecursoModule,
+    UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, JwtAuthGuard, LocalAuthGuard],
 })
 export class AppModule {}
