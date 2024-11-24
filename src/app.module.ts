@@ -15,6 +15,8 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/guards/local-auth/local-auth.guard';
+import { PrestamistaPrestamoModule } from './prestamista-prestamo/prestamista-prestamo.module';
+import { PrestamistaRecursoModule } from './prestamista-recurso/prestamista-recurso.module';
 
 @Module({
   imports: [DeudorModule, PrestamoModule,
@@ -35,6 +37,8 @@ import { LocalAuthGuard } from './auth/guards/local-auth/local-auth.guard';
     RecursoModule,
     UserModule,
     AuthModule,
+    PrestamistaPrestamoModule,
+    PrestamistaRecursoModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtAuthGuard, LocalAuthGuard],
