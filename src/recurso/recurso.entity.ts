@@ -6,6 +6,9 @@ export class RecursoEntity {
     @PrimaryGeneratedColumn('uuid') 
     id: string;
 
+    @Column()
+    nombre: string;
+    
     @ManyToOne(() => PrestamistaEntity, prestamista => prestamista.recursos)
     prestamista: PrestamistaEntity;
 }
