@@ -718,6 +718,45 @@
 			},
 			"response": []
 		},
+		
+		{
+			"name": "Add a recurso to a prestamista",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/{{recurso_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"prestamistas",
+						"{{prestamista_id}}",
+						"recursos",
+						"{{recurso_id}}"
+					]
+				}
+			},
+			"response": []
+		},
 		{
 			"name": "Delete an recurso of a prestamista",
 			"event": [
