@@ -25,5 +25,4 @@ export class PrestamoDto {
     @IsString()
     @IsNotEmpty()
     deudorId: string;
-
 }
