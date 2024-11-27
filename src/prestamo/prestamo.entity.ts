@@ -25,6 +25,6 @@ export class PrestamoEntity {
   @ManyToOne(() => DeudorEntity, deudor => deudor.id)
     deudor: DeudorEntity;
 
-  @ManyToOne(() => PrestamistaEntity, prestamista => prestamista.prestamos)
+  @ManyToOne(() => PrestamistaEntity, prestamista => prestamista.id)
     prestamista: PrestamistaEntity;
 }
