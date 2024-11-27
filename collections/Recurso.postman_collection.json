@@ -295,10 +295,20 @@
 							]
 						}
 					},
-					"_postman_previewlanguage": null,
-					"header": null,
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": null
+					"body": "[\n     {\n        \"id\":1,\n        \"nombre\": \"casa\",\n        \"tipo\": \"inmueble\",\n        \"descripcion\": \"Casa acogedora de diseño moderno, con amplios espacios, iluminación natural y detalles que combinan confort y elegancia\",\n        \"foto\": \"https://source.unsplash.com/random/800x600\"\n    },\n     {\n        \"id\":2,\n        \"nombre\": \"Carro\",\n        \"tipo\": \"vehiculo\",\n        \"descripcion\": \"lamborghini potrillo\",\n        \"foto\": \"https://source.unsplash.com/random/800x800\"\n    }\n]\n   "
 				}
 			]
 		},
@@ -325,19 +335,30 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/recursos",
+							"raw": "{{base_url}}/recursos/{{recurso_id}}",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"recursos"
+								"recursos",
+								"{{recurso_id}}"
 							]
 						}
 					},
-					"_postman_previewlanguage": null,
-					"header": null,
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": null
+					"body": "{\n\t\"nombre\": \"casa\",\n    \"tipo\": \"inmueble\",\n    \"descripcion\": \"Casa acogedora de diseño moderno, con amplios espacios, iluminación natural y detalles que combinan confort y elegancia\",\n    \"foto\": \"https://source.unsplash.com/random/800x600\"\n}"
 				}
 			]
 		},
@@ -374,10 +395,18 @@
 							]
 						}
 					},
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
 					"cookie": [],
-					"body": null
+					"body": "{\n   \"statusCode\": 404,\n   \"message\": \"No se encontró el recurso\"\n}"
 				}
 			]
 		},
@@ -464,6 +493,8 @@
 							]
 						}
 					},
+					"status": "No Content",
+					"code": 204,
 					"_postman_previewlanguage": null,
 					"header": null,
 					"cookie": [],
