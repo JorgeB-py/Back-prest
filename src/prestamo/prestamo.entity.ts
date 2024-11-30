@@ -1,3 +1,4 @@
+import { PagoEntity } from 'src/pago/pago.entity';
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { DeudorEntity } from '../deudor/deudor.entity';
 import { PrestamistaEntity } from '../prestamista/prestamista.entity';

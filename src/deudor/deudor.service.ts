@@ -30,7 +30,7 @@ export class DeudorService {
     
           const pagosUltimoMes = prestamo.historialPagos.filter(pago => {
             // Convertir la fecha de pago a un objeto Date
-            const fechaPago = new Date(pago.fechaPago);
+            const fechaPago = new Date(pago.fecha);
             return fechaPago >= fechaHaceUnMes; // Filtrar los pagos que sean en el último mes
           });
     

@@ -17,6 +17,8 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth/jwt-auth.guard';
 import { LocalAuthGuard } from './auth/guards/local-auth/local-auth.guard';
 import { PrestamistaPrestamoModule } from './prestamista-prestamo/prestamista-prestamo.module';
 import { PrestamistaRecursoModule } from './prestamista-recurso/prestamista-recurso.module';
+import { PagoModule } from './pago/pago.module';
+import { PagoEntity } from './pago/pago.entity';
 
 @Module({
   imports: [DeudorModule, PrestamoModule,
@@ -27,7 +29,7 @@ import { PrestamistaRecursoModule } from './prestamista-recurso/prestamista-recu
       username: 'postgres',   
       password: 'postgres',
       database: 'Prest',
-      entities: [PrestamoEntity, DeudorEntity, PrestamistaEntity, RecursoEntity],
+      entities: [PrestamoEntity, DeudorEntity, PrestamistaEntity, RecursoEntity, PagoEntity],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true,
@@ -39,6 +41,7 @@ import { PrestamistaRecursoModule } from './prestamista-recurso/prestamista-recu
     AuthModule,
     PrestamistaPrestamoModule,
     PrestamistaRecursoModule,
+    PagoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
