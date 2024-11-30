@@ -12,6 +12,35 @@ export class DeudorService {
         @InjectRepository(DeudorEntity)
         private readonly deudorRepository: Repository<DeudorEntity>
     ){}
+    
+    async calcularInteresesGanadosUltimoMes(deudorId: string): Promise<number> {
+        const deudor = await this.deudorRepository.findOne({
+          where: { id: deudorId },
+          relations: ['prestamos'],
+        });
+    
+        if (!deudor) {
+          throw new Error('Deudor no encontrado');
+        }
+    
+        const interesesTotales = deudor.prestamos.reduce((totalIntereses, prestamo) => {
+          // Filtrar pagos en el historial del préstamo que estén dentro del último mes
+          const fechaHaceUnMes = new Date();
+          fechaHaceUnMes.setMonth(fechaHaceUnMes.getMonth() - 1);
+    
+          const pagosUltimoMes = prestamo.historialPagos.filter(pago => {
+            // Convertir la fecha de pago a un objeto Date
+            const fechaPago = new Date(pago.fechaPago);
+            return fechaPago >= fechaHaceUnMes; // Filtrar los pagos que sean en el último mes
+          });
+    
+          // Sumar los intereses ganados en el último mes
+          const interesesGanados = pagosUltimoMes.reduce((total, pago) => total + pago.interes, 0);
+          return totalIntereses + interesesGanados;
+        }, 0);
+    
+        return interesesTotales;
+      }
     async findAll(): Promise<DeudorEntity[]> {
         return await this.deudorRepository.find({ relations: ["prestamos"] });
     }

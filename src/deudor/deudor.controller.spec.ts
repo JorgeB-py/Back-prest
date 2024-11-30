@@ -12,6 +12,7 @@ describe('DeudorController', () => {
         id: '1',
         nombrecompleto: 'Juan Perez',
         email: 'jorgebtm26@gmail.com',
+        fecha: new Date(),
         foto: 'foto.png',
         ocupacion: 'estudiante',
         direccion: 'Calle Falsa 123',
@@ -26,6 +27,7 @@ describe('DeudorController', () => {
             nombrecompleto: 'Maria Lopez',
             direccion: 'Calle Verdadera 456',
             email: 'jorgebtm26@gmail.com',
+            fecha: new Date(),
             foto: 'foto.png',
             ocupacion: 'estudiante',
             telefono: '987654321',
@@ -90,6 +92,7 @@ describe('DeudorController', () => {
             const deudorDto: DeudorDto = {
                 nombrecompleto: 'Carlos Ruiz',
                 email:'jorgebtm26@gmail.com',
+                fecha: new Date(),
                 foto:'foto.png',
                 ocupacion:'estudiante',
                 direccion: 'Nueva Calle 789',
@@ -109,6 +112,7 @@ describe('DeudorController', () => {
                 email:'jorgebtm26@gmail.com',
                 foto:'foto.png',
                 ocupacion:'estudiante',
+                fecha: new Date(),
                 direccion: 'Calle Falsa 999',
                 telefono: '111111111',
             };

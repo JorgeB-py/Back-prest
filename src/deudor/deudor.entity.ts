@@ -13,6 +13,9 @@ export class DeudorEntity {
   direccion: string;
 
   @Column()
+  fecha: Date;
+
+  @Column()
   telefono: string;
 
   @Column()

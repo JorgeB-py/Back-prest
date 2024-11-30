@@ -13,10 +13,10 @@ export class PrestamoService {
         private readonly prestamoRepository: Repository<PrestamoEntity>
     ){}
     async findAll(): Promise<PrestamoEntity[]> {
-        return await this.prestamoRepository.find({ relations: ["deudor"] });
+        return await this.prestamoRepository.find({ relations: ["deudor", "historialpagos"] });
     }
     async findOne(id: string): Promise<PrestamoEntity> {
-        const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({where: {id}, relations: ["deudor"] } );
+        const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({where: {id}, relations: ["deudor", "historialpagos"] } );
         if (!prestamo)
           throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND);
    

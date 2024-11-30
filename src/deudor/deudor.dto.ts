@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsString, IsUrl } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsDate, IsNotEmpty, IsString, IsUrl } from 'class-validator';
 export class DeudorDto {
 
     @IsString()
@@ -8,6 +9,11 @@ export class DeudorDto {
     @IsString()
     @IsNotEmpty()
     direccion: string;
+
+    @IsDate()
+    @IsNotEmpty()
+    @Transform(({ value }) => new Date(value), { toClassOnly: true })
+    fecha: Date;
 
     @IsString()
     @IsNotEmpty()

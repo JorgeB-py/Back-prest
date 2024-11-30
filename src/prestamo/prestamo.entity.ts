@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { DeudorEntity } from '../deudor/deudor.entity';
 import { PrestamistaEntity } from '../prestamista/prestamista.entity';
 
@@ -27,4 +27,7 @@ export class PrestamoEntity {
 
   @ManyToOne(() => PrestamistaEntity, prestamista => prestamista.id)
     prestamista: PrestamistaEntity;
+
+  @OneToMany(() => PagoEntity, historialPagos => historialPagos.prestamo)
+    historialPagos: PagoEntity[];
 }

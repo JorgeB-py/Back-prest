@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsDate, IsInt, IsNotEmpty, IsNumber, IsString, IsUrl } from 'class-validator';
+import { IsArray, IsBoolean, IsDate, IsInt, IsNotEmpty, IsNumber, IsString, IsUrl } from 'class-validator';
 export class PrestamoDto {
 
     @IsNumber()
@@ -25,4 +25,8 @@ export class PrestamoDto {
     @IsString()
     @IsNotEmpty()
     deudorId: string;
+
+    @IsString()
+    @IsNotEmpty()
+    historialPagosId: string;
 }

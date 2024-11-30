@@ -41,6 +41,7 @@ describe('DeudorPrestamoService', () => {
     nombrecompleto: 'Test Deudor',
     direccion: '123 Main St',
     telefono: '123456789',
+    fecha: new Date(),
     email: 'test@example.com',
     ocupacion: 'Test Occupation',
     foto: 'test.jpg',
@@ -55,6 +56,7 @@ describe('DeudorPrestamoService', () => {
     interes: 5,
     pagado: false,
     deudor: mockDeudor,
+    historialPagos: [],
     prestamista:null
   };
 

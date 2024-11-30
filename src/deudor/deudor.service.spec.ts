@@ -15,6 +15,7 @@ describe('DeudorService', () => {
       nombrecompleto: 'John Doe',
       direccion: '123 Main St',
       telefono: '1234567890',
+      fecha: new Date(),
       email: 'john.doe@example.com',
       prestamos: [],
     },
@@ -22,6 +23,7 @@ describe('DeudorService', () => {
       id: '2',
       nombrecompleto: 'Jane Doe',
       direccion: '456 Elm St',
+      fecha: new Date(),
       telefono: '0987654321',
       email: 'jane.doe@example.com',
       prestamos: [],
@@ -33,6 +35,7 @@ describe('DeudorService', () => {
     nombrecompleto: 'New Deudor',
     direccion: '789 Oak St',
     telefono: '1122334455',
+    fecha: new Date(),
     email: 'new.deudor@example.com',
     prestamos: [],
   } as DeudorEntity;

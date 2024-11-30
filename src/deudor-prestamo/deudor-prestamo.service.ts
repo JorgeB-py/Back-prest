@@ -74,7 +74,7 @@ export class DeudorPrestamoService {
     if (!deudor)
       throw new BusinessLogicException("The deudor with the given id was not found", BusinessError.NOT_FOUND)
 
-    const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({ where: { id: prestamoId }, relations: ["deudor"] });
+    const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({ where: { id: prestamoId }, relations: ["deudor", "historialPagos"] });
     if (!prestamo)
       throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND)
 
