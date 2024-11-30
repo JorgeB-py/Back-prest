@@ -1,7 +1,8 @@
-import { PagoEntity } from 'src/pago/pago.entity';
+import { PagoEntity } from '../pago/pago.entity';
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { DeudorEntity } from '../deudor/deudor.entity';
 import { PrestamistaEntity } from '../prestamista/prestamista.entity';
+import { RecursoEntity } from '../recurso/recurso.entity';
 
 @Entity()
 export class PrestamoEntity {
@@ -31,4 +32,7 @@ export class PrestamoEntity {
 
   @OneToMany(() => PagoEntity, historialpagos => historialpagos.prestamo)
     historialpagos: PagoEntity[];
+
+  @ManyToOne(() => RecursoEntity, recurso => recurso.prestamos)
+  recurso: RecursoEntity; 
 }

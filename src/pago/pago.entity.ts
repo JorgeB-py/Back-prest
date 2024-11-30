@@ -1,4 +1,4 @@
-import { PrestamoEntity } from "src/prestamo/prestamo.entity";
+import { PrestamoEntity } from "../prestamo/prestamo.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

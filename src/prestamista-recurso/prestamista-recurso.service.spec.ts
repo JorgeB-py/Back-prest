@@ -35,6 +35,8 @@ describe('PrestamistaRecursoService', () => {
     for (let i = 0; i < 5; i++) {
       const recurso: RecursoEntity = await recursoRepository.save({
         nombre: faker.commerce.productName(),
+        tipo: faker.commerce.productAdjective (),
+        descripcion: faker.commerce.productDescription(),
       });
       recursosList.push(recurso);
     }
@@ -58,6 +60,8 @@ describe('PrestamistaRecursoService', () => {
   it('addRecursoPrestamista should add a recurso to a prestamista', async () => {
     const newRecurso: RecursoEntity = await recursoRepository.save({
       nombre: faker.commerce.productName(),
+      tipo: faker.commerce.productAdjective (),
+      descripcion: faker.commerce.productDescription(),
     });
 
     const newPrestamista: PrestamistaEntity = await prestamistaRepository.save({
@@ -95,6 +99,8 @@ describe('PrestamistaRecursoService', () => {
   it('addRecursoPrestamista should throw an exception for an invalid prestamista', async () => {
     const newRecurso: RecursoEntity = await recursoRepository.save({
       nombre: faker.commerce.productName(),
+      tipo: faker.commerce.productAdjective (),
+      descripcion: faker.commerce.productDescription(),
     });
 
     await expect(() => service.addRecursoPrestamista("0", newRecurso.id))
@@ -107,6 +113,8 @@ describe('PrestamistaRecursoService', () => {
 
     expect(storedRecurso).not.toBeNull();
     expect(storedRecurso.nombre).toBe(recurso.nombre);
+    expect(storedRecurso.tipo).toBe(recurso.tipo);
+    expect(storedRecurso.descripcion).toBe(recurso.descripcion);
   });
 
   it('findRecursoByPrestamistaIdRecursoId should throw an exception for an invalid recurso', async () => {
@@ -127,11 +135,15 @@ describe('PrestamistaRecursoService', () => {
   it('associateRecursosPrestamista should update recursos list for a prestamista', async () => {
     const newRecurso: RecursoEntity = await recursoRepository.save({
       nombre: faker.commerce.productName(),
+      tipo: faker.commerce.productAdjective (),
+      descripcion: faker.commerce.productDescription(),
     });
 
     const updatedPrestamista: PrestamistaEntity = await service.associateRecursosPrestamista(prestamista.id, [newRecurso]);
     expect(updatedPrestamista.recursos.length).toBe(1);
     expect(updatedPrestamista.recursos[0].nombre).toBe(newRecurso.nombre);
+    expect(updatedPrestamista.recursos[0].tipo).toBe(newRecurso.tipo);
+    expect(updatedPrestamista.recursos[0].descripcion).toBe(newRecurso.descripcion);
   });
 
   it('deleteRecursoPrestamista should remove a recurso from a prestamista', async () => {

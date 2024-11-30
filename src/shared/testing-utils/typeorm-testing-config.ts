@@ -3,7 +3,7 @@ import { PrestamistaEntity } from '../../prestamista/prestamista.entity';
 import { RecursoEntity } from '../../recurso/recurso.entity';
 import { PrestamoEntity } from '../../prestamo/prestamo.entity';
 import { DeudorEntity } from '../../deudor/deudor.entity';
-import { PagoEntity } from 'src/pago/pago.entity';
+import { PagoEntity } from '../../pago/pago.entity';
 
 export const TypeOrmTestingConfig = () => [
   TypeOrmModule.forRoot({
