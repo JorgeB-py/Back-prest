@@ -29,6 +29,6 @@ export class PrestamoEntity {
   @ManyToOne(() => PrestamistaEntity, prestamista => prestamista.id)
     prestamista: PrestamistaEntity;
 
-  @OneToMany(() => PagoEntity, historialPagos => historialPagos.prestamo)
-    historialPagos: PagoEntity[];
+  @OneToMany(() => PagoEntity, historialpagos => historialpagos.prestamo)
+    historialpagos: PagoEntity[];
 }

@@ -26,7 +26,4 @@ export class PrestamoDto {
     @IsNotEmpty()
     deudorId: string;
 
-    @IsString()
-    @IsNotEmpty()
-    historialPagosId: string;
 }

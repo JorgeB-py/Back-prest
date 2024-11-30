@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "eae5a3b3-ade4-4438-9880-105e71be6c71",
+		"name": "Crear pago",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29349654",
+		"_collection_link": "https://crimson-meteor-333919.postman.co/workspace/Pago~058715a5-fb1a-4140-870c-180bc38db3a0/collection/29349654-eae5a3b3-ade4-4438-9880-105e71be6c71?action=share&source=collection_link&creator=29349654"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var response = pm.response.json();",
+							"pm.globals.set(\"access_token\", response.token);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a prestamo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"prestamo_id\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"monto\":2000,\r\n    \"interes\":5,\r\n    \"fechainicio\":\"2024/05/01\",\r\n    \"fechafin\":\"2024/06/01\",\r\n    \"pagado\":true,\r\n    \"deudorId\":\"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/prestamo",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"prestamo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear pago",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"fecha\": \"2024-11-30\",\r\n  \"capital\": 5000,\r\n  \"interes\": 200\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/pagos",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"pagos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add pago a prestamo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/prestamos/1/pagos/94d597fb-c86f-482e-bd8a-5748920d952c",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"prestamos",
+						"1",
+						"pagos",
+						"94d597fb-c86f-482e-bd8a-5748920d952c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an prestamo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/prestamo/{{prestamo_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"prestamo",
+						"{{prestamo_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

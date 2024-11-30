@@ -19,6 +19,7 @@ import { PrestamistaPrestamoModule } from './prestamista-prestamo/prestamista-pr
 import { PrestamistaRecursoModule } from './prestamista-recurso/prestamista-recurso.module';
 import { PagoModule } from './pago/pago.module';
 import { PagoEntity } from './pago/pago.entity';
+import { PrestamoPagoModule } from './prestamo-pago/prestamo-pago.module';
 
 @Module({
   imports: [DeudorModule, PrestamoModule,
@@ -42,6 +43,7 @@ import { PagoEntity } from './pago/pago.entity';
     PrestamistaPrestamoModule,
     PrestamistaRecursoModule,
     PagoModule,
+    PrestamoPagoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -16,8 +16,8 @@ export class PagoEntity {
     @Column() 
     interes: number;
 
-    //TODO historialPagos o historial_pagos?
-    @ManyToOne(() => PrestamoEntity, prestamo => prestamo.historialPagos)
+    //TODO historialpagos o historial_pagos?
+    @ManyToOne(() => PrestamoEntity, prestamo => prestamo.historialpagos)
     prestamo: PrestamoEntity;
 
 
