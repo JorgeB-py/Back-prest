@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PagoEntity } from 'src/pago/pago.entity';
+import { PagoEntity } from '../pago/pago.entity';
 import { PrestamoEntity } from 'src/prestamo/prestamo.entity';
 import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
 import { Repository } from 'typeorm';

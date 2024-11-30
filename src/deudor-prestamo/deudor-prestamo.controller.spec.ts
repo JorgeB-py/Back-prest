@@ -10,8 +10,8 @@ describe('DeudorPrestamoController', () => {
   let service: DeudorPrestamoService;
 
   const mockPrestamosDto: PrestamoDto[] = [
-    { monto: 1000, fechafin:new Date(), fechainicio: new Date(), pagado:false ,interes: 5, deudorId: '1', historialpagosId: '1' },
-    { monto: 2000, fechafin:new Date(), fechainicio: new Date(), pagado:true ,interes: 10, deudorId: '1', historialpagosId: '2' },
+    { monto: 1000, fechafin:new Date(), fechainicio: new Date(), pagado:false ,interes: 5, deudorId: '1'},
+    { monto: 2000, fechafin:new Date(), fechainicio: new Date(), pagado:true ,interes: 10, deudorId: '1'},
   ];
   
   const mockPrestamosEntities = plainToInstance(PrestamoEntity, mockPrestamosDto);
