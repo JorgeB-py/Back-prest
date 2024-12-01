@@ -7,7 +7,7 @@ export class PagoEntity {
     @PrimaryGeneratedColumn()
     id: string;
 
-    @Column({ type: 'date' }) 
+    @Column() 
     fecha: Date;
 
     @Column() 
