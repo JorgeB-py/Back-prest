@@ -93,6 +93,7 @@ describe('PrestamoPagoService', () => {
 
   it('addPagoPrestamo should thrown exception for an invalid pago', async () => {
     const newPrestamo: PrestamoEntity = await prestamoRepository.save({
+      nombre: faker.commerce.product(),
       monto: parseFloat(faker.finance.amount({ min: 10, max: 100, dec: 0 })),
       interes: parseFloat(faker.finance.amount({ min: 1, max: 10, dec: 0 })),
       fechainicio: faker.date.past(),
