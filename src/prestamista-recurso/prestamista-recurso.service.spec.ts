@@ -37,6 +37,7 @@ describe('PrestamistaRecursoService', () => {
         nombre: faker.commerce.productName(),
         tipo: faker.commerce.productAdjective (),
         descripcion: faker.commerce.productDescription(),
+        valor: parseFloat(faker.finance.amount({ min: 100, max: 1000, dec: 0 })),
       });
       recursosList.push(recurso);
     }
@@ -62,6 +63,7 @@ describe('PrestamistaRecursoService', () => {
       nombre: faker.commerce.productName(),
       tipo: faker.commerce.productAdjective (),
       descripcion: faker.commerce.productDescription(),
+      valor: parseFloat(faker.finance.amount({ min: 100, max: 1000, dec: 0 })),
     });
 
     const newPrestamista: PrestamistaEntity = await prestamistaRepository.save({
@@ -101,6 +103,7 @@ describe('PrestamistaRecursoService', () => {
       nombre: faker.commerce.productName(),
       tipo: faker.commerce.productAdjective (),
       descripcion: faker.commerce.productDescription(),
+      valor: parseFloat(faker.finance.amount({ min: 100, max: 1000, dec: 0 })),
     });
 
     await expect(() => service.addRecursoPrestamista("0", newRecurso.id))
@@ -137,6 +140,7 @@ describe('PrestamistaRecursoService', () => {
       nombre: faker.commerce.productName(),
       tipo: faker.commerce.productAdjective (),
       descripcion: faker.commerce.productDescription(),
+      valor: parseFloat(faker.finance.amount({ min: 100, max: 1000, dec: 0 })),
     });
 
     const updatedPrestamista: PrestamistaEntity = await service.associateRecursosPrestamista(prestamista.id, [newRecurso]);

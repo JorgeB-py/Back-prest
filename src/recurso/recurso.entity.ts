@@ -14,7 +14,10 @@ export class RecursoEntity {
     tipo: string;
 
     @Column()
-    descripcion: string;    
+    descripcion: string;  
+    
+    @Column()
+    valor: number;
     
     @ManyToOne(() => PrestamistaEntity, prestamista => prestamista.recursos)
     prestamista: PrestamistaEntity;
