@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ba8d4959-6d54-467a-8c5b-ff7e9a9004c3",
+		"_postman_id": "af595b01-faa2-4636-b5a9-9c97999b45a0",
 		"name": "PrestamistaRecurso",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "34867910"
@@ -13,27 +13,25 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var response = pm.response.json();",
-							"pm.globals.set(\"access_token\", response.token);",
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
+							"var response = pm.response.json();\r",
+							"if (response.token) {\r",
+							"    pm.globals.set(\"access_token\", response.token);\r",
+							"    console.log(\"Token guardado en variable de entorno:\", response.token);\r",
+							"} else {\r",
+							"    console.log(\"No se encontró el token en la respuesta\");\r",
+							"}"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"admin\",\n    \"admin\": \"admin\"\n}",
+					"raw": "{\r\n    \"username\":\"admin\",\r\n    \"password\":\"admin\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -41,10 +39,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/users/login",
+					"raw": "http://localhost:3000/users/login",
+					"protocol": "http",
 					"host": [
-						"{{baseUrl}}"
+						"localhost"
 					],
+					"port": "3000",
 					"path": [
 						"users",
 						"login"
@@ -118,7 +118,8 @@
 							"    pm.response.to.have.status(201);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -132,7 +133,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\":dinero,\r\n }",
+					"raw": "{\r\n    \"nombre\":\"dinero\",\r\n    \"tipo\": \"dinero\",\r\n    \"descripcion\":\"dindero\",\r\n    \"valor\": 1\r\n }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -165,7 +166,8 @@
 							"    pm.response.to.have.status(201);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -179,7 +181,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\":dinero2,\r\n }",
+					"raw": "{\r\n    \"nombre\":\"dinero2\",\r\n    \"tipo\": \"dinero\",\r\n    \"descripcion\":\"dindero\",\r\n    \"valor\": 1\r\n }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -252,7 +254,8 @@
 							"    pm.expect(data.message).to.eql(\"The recurso with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -265,7 +268,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/00000000-0000-0000-0000-000000000000",
+					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/00000000000000000000000000000000",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -273,7 +276,7 @@
 						"prestamistas",
 						"{{prestamista_id}}",
 						"recursos",
-						"00000000-0000-0000-0000-000000000000"
+						"00000000000000000000000000000000"
 					]
 				}
 			},
@@ -295,7 +298,8 @@
 							"    pm.expect(data.message).to.eql(\"The prestamista with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -308,13 +312,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/00000000-0000-0000-0000-000000000000/recursos/{{recurso_id}}",
+					"raw": "{{baseUrl}}/prestamistas/00000000000000000000000000000000/recursos/{{recurso_id}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"prestamistas",
-						"00000000-0000-0000-0000-000000000000",
+						"00000000000000000000000000000000",
 						"recursos",
 						"{{recurso_id}}"
 					]
@@ -376,7 +380,8 @@
 							"    pm.expect(data.message).to.eql(\"The recurso with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -389,7 +394,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/00000000-0000-0000-0000-000000000000",
+					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/00000000000000000000000000000000",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -397,7 +402,7 @@
 						"prestamistas",
 						"{{prestamista_id}}",
 						"recursos",
-						"00000000-0000-0000-0000-000000000000"
+						"00000000000000000000000000000000"
 					]
 				}
 			},
@@ -419,7 +424,8 @@
 							"    pm.expect(data.message).to.eql(\"The prestamista with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -432,56 +438,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/00000000-0000-0000-0000-000000000000/recursos/{{recurso_id}}",
+					"raw": "{{baseUrl}}/prestamistas/00000000000000000000000000000000/recursos/{{recurso_id}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"prestamistas",
-						"00000000-0000-0000-0000-000000000000",
-						"recursos",
-						"{{recurso_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get a recurso non-associated to a prestamista",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 412\", function () {",
-							"    pm.response.to.have.status(412);",
-							"});",
-							"",
-							"pm.test(\"Get expected error message\", function () {",
-							"    var data = pm.response.json();",
-							"    pm.expect(data.message).to.eql(\"The recurso with the given id is not associated to the prestamista\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					}
-				],
-				"url": {
-					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/{{recurso_id_2}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"prestamistas",
-						"{{prestamista_id}}",
+						"00000000000000000000000000000000",
 						"recursos",
 						"{{recurso_id}}"
 					]
@@ -543,7 +506,8 @@
 							"    pm.expect(data.message).to.eql(\"The prestamista with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -556,13 +520,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/00000000-0000-0000-0000-000000000000/recursos/",
+					"raw": "{{baseUrl}}/prestamistas/00000000000000000000000000000000/recursos/",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"prestamistas",
-						"00000000-0000-0000-0000-000000000000",
+						"00000000000000000000000000000000",
 						"recursos",
 						""
 					]
@@ -617,57 +581,6 @@
 			"response": []
 		},
 		{
-			"name": "Update invalid recurso of a prestamista",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 404\", function () {",
-							"    pm.response.to.have.status(404);",
-							"});",
-							"",
-							"pm.test(\"Get expected error message\", function () {",
-							"    var data = pm.response.json();",
-							"    pm.expect(data.message).to.eql(\"The recurso with the given id was not found\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "[\n    {\n        \"id\": \"00000000-0000-0000-0000-000000000000\"\n    }\n]",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"prestamistas",
-						"{{prestamista_id}}",
-						"recursos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Update recurso of an invalid prestamista",
 			"event": [
 				{
@@ -683,7 +596,8 @@
 							"    pm.expect(data.message).to.eql(\"The prestamista with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -705,20 +619,19 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/00000000-0000-0000-0000-000000000000/recursos",
+					"raw": "{{baseUrl}}/prestamistas/00000000000000000000000000000000/recursos",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"prestamistas",
-						"00000000-0000-0000-0000-000000000000",
+						"00000000000000000000000000000000",
 						"recursos"
 					]
 				}
 			},
 			"response": []
 		},
-		
 		{
 			"name": "Add a recurso to a prestamista",
 			"event": [
@@ -811,7 +724,8 @@
 							"    pm.expect(data.message).to.eql(\"The prestamista with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -824,13 +738,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/00000000-0000-0000-0000-000000000000/recursos/{{recurso_id}}",
+					"raw": "{{baseUrl}}/prestamistas/00000000000000000000000000000000/recursos/{{recurso_id}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"prestamistas",
-						"00000000-0000-0000-0000-000000000000",
+						"00000000000000000000000000000000",
 						"recursos",
 						"{{recurso_id}}"
 					]
@@ -854,7 +768,8 @@
 							"    pm.expect(data.message).to.eql(\"The recurso with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -867,7 +782,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/00000000-0000-0000-0000-000000000000",
+					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/00000000000000000000000000000000",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -875,50 +790,7 @@
 						"prestamistas",
 						"{{prestamista_id}}",
 						"recursos",
-						"00000000-0000-0000-0000-000000000000"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete an recurso non-associated to a prestamista",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 412\", function () {",
-							"    pm.response.to.have.status(412);",
-							"});",
-							"",
-							"pm.test(\"Get expected error message\", function () {",
-							"    var data = pm.response.json();",
-							"    pm.expect(data.message).to.eql(\"The recurso with the given id is not associated to the prestamista\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					}
-				],
-				"url": {
-					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/{{recurso_id}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"prestamistas",
-						"{{prestamista_id}}",
-						"recursos",
-						"{{recurso_id}}"
+						"00000000000000000000000000000000"
 					]
 				}
 			},
