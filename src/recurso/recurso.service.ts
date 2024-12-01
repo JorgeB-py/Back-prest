@@ -48,13 +48,13 @@ export class RecursoService
         const persistedrecurso: RecursoEntity = await this.recursoRepository.findOne({where:{id}});
         // Se verifica que el recurso exista.
         if (!persistedrecurso)
-          throw new BusinessLogicException("No se encontro el recurso con el Id dado ", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("No se encontro el recurso con el Id dado", BusinessError.NOT_FOUND);
         //Se verifica que el valor del recurso no sea negativo.
         else if(recurso.valor <= 0)
             throw new BusinessLogicException("El valor del recurso no es valido", BusinessError.BAD_REQUEST);
         //Se verifica que el recurso tenga un nombre y tipo.
-        else if(recurso.tipo === "" || recurso.tipo === '' || recurso.nombre === '')
-            throw new BusinessLogicException("Falta información para el recurso", BusinessError.BAD_REQUEST);
+        else if(recurso.tipo === "" || recurso.tipo === '' || recurso.nombre === '' || recurso.descripcion === '')
+            throw new BusinessLogicException("Falta información para crear el recurso", BusinessError.BAD_REQUEST);
             
         return await this.recursoRepository.save({...persistedrecurso, ...recurso});
     }
@@ -65,9 +65,6 @@ export class RecursoService
         // Se verifica que el recurso exista.
         if (!recurso)
           throw new BusinessLogicException("No se encontro el recurso con el Id dado", BusinessError.NOT_FOUND);
-        // Se verifica que el recurso no tenga prestamos asociados.
-        else if(recurso.prestamos.length > 0)
-            throw new BusinessLogicException("El recurso tiene prestamos asociados", BusinessError.BAD_REQUEST);
         
         await this.recursoRepository.remove(recurso);
     }
