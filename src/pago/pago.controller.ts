@@ -11,10 +11,26 @@ export class PagoController {
 
     constructor(private readonly pagoService: PagoService) {}
 
+    @Get()
+    async findAll() {
+      return await this.pagoService.findAll();
+    }
+
+    @Get(':pagoId')
+    async findOne(@Param('pagoId') pagoId: string) {
+      return await this.pagoService.findOne(pagoId);
+    }
+
     @Post()
     async create(@Body() pagoDto: PagoDto) {
         const pago: PagoEntity = plainToInstance(PagoEntity, pagoDto);
         return await this.pagoService.create(pago);
+    }
+
+    @Put(':pagoId')
+    async update(@Param('pagoId') pagoId: string, @Body() pagoDto: PagoDto) {
+      const pago: PagoEntity = plainToInstance(PagoEntity, pagoDto);
+      return await this.pagoService.update(pagoId, pago);
     }
 
     @Delete(':pagoId')
