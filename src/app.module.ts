@@ -30,7 +30,7 @@ import { RecursoPrestamoModule } from './recurso-prestamo/recurso-prestamo.modul
       port: 5432,
       username: 'postgres',   
       password: 'postgres',
-      database: 'Prest2',
+      database: 'Prest',
       entities: [PrestamoEntity, DeudorEntity, PrestamistaEntity, RecursoEntity, PagoEntity],
       dropSchema: false,
       synchronize: true,
