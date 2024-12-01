@@ -57,7 +57,8 @@ describe('DeudorPrestamoService', () => {
     pagado: false,
     deudor: mockDeudor,
     historialpagos: [],
-    prestamista:null
+    prestamista:null,
+    recurso:null,
   };
 
   describe('addPrestamoDeudor', () => {
