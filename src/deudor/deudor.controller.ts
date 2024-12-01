@@ -12,7 +12,8 @@ import { Role } from '../user/role.enum';
 @UseInterceptors(BusinessErrorsInterceptor)
 @Controller('deudor')
 export class DeudorController {
-    constructor(private readonly deudorService: DeudorService) { }
+    constructor(private readonly deudorService: DeudorService,
+    ) { }
 
     @Get()
     @UseGuards(JwtAuthGuard)
