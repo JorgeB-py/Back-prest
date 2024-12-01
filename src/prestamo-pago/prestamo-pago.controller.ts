@@ -16,6 +16,22 @@ export class PrestamoPagoController {
         return await this.prestamoPagoService.addPagoPrestamo(prestamoId, pagoId);
     }
 
+    @Get(':prestamoId/pagos/:pagoId')
+    async findPagoByPrestamoIdPagoId(@Param('prestamoId') prestamoId: string, @Param('pagoId') pagoId: string){
+        return await this.prestamoPagoService.findPagoByPrestamoIdPagoId(prestamoId, pagoId);
+    }
+
+    @Get(':prestamoId/pagos')
+    async findPagosByPrestamoId(@Param('prestamoId') prestamoId: string){
+        return await this.prestamoPagoService.findPagosByPrestamoId(prestamoId);
+    }
+
+    @Put(':prestamoId/pagos')
+    async associatePagosPrestamo(@Body() pagosDto: PagoDto[], @Param('prestamoId') prestamoId: string){
+        const pagos = plainToInstance(PagoEntity, pagosDto)
+        return await this.prestamoPagoService.associatePagosPrestamo(prestamoId, pagos);
+    }
+    
     @Delete(':prestamoId/pagos/:pagoId')
     @HttpCode(204)
     async deletePagoPrestamo(@Param('prestamoId') prestamoId: string, @Param('pagoId') pagoId: string){

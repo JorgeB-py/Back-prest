@@ -20,7 +20,7 @@ export class PrestamoPagoService {
     async addPagoPrestamo(prestamoId: string, pagoId: string): Promise<PrestamoEntity> {
         const pago: PagoEntity = await this.pagoRepository.findOne({where: {id: pagoId}});
         if (!pago)
-          throw new BusinessLogicException("The payment with the given id was not found", BusinessError.NOT_FOUND);
+          throw new BusinessLogicException("The pago with the given id was not found", BusinessError.NOT_FOUND);
       
         const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({where: {id: prestamoId}, relations: ["historialpagos"]})
         if (!prestamo)

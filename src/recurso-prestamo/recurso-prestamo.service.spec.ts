@@ -32,6 +32,7 @@ describe('RecursoPrestamoService', () => {
   prestamoList = [];
   for (let i = 0; i < 5; i++) {
     const prestamo: PrestamoEntity = await prestamoRepository.save({
+      nombre: faker.commerce.productName(),
       monto: parseFloat(faker.finance.amount({ min: 10, max: 100, dec: 0 })),
       interes: parseFloat(faker.finance.amount({ min: 1, max: 10, dec: 0 })),
       fechainicio: faker.date.past(),
@@ -59,6 +60,7 @@ describe('RecursoPrestamoService', () => {
       it('Debería asociar el prestamo al recurso dado', async () => 
         {
           const prestamoAuxiliar: PrestamoEntity = await prestamoRepository.save({
+            nombre: faker.commerce.productName(),
             monto: parseFloat(faker.finance.amount({ min: 10, max: 100, dec: 0 })),
             interes: parseFloat(faker.finance.amount({ min: 1, max: 10, dec: 0 })),
             fechainicio: faker.date.past(),
@@ -91,6 +93,7 @@ describe('RecursoPrestamoService', () => {
       it('Debería lanzar una excepción si el monto del prestamo supera el valor del recurso disponible', async () =>
       {
         const prestamoAuxiliar: PrestamoEntity = await prestamoRepository.save({ 
+          nombre: faker.commerce.productName(),
           monto: recurso.valor + 1,
           interes: parseFloat(faker.finance.amount({ min: 1, max: 10, dec: 0 })),
           fechainicio: faker.date.past(),
@@ -127,6 +130,7 @@ describe('RecursoPrestamoService', () => {
     it('Debería lanzar una excepción si el prestamo no esta asociado al recurso', async () =>
     {
       const prestamoAuxiliar: PrestamoEntity = await prestamoRepository.save({
+        nombre: faker.commerce.productName(),
         monto: parseFloat(faker.finance.amount({ min: 10, max: 100, dec: 0 })),
         interes: parseFloat(faker.finance.amount({ min: 1, max: 10, dec: 0 })),
         fechainicio: faker.date.past(),
@@ -160,6 +164,7 @@ describe('RecursoPrestamoService', () => {
       let prestamoListAuxiliar : PrestamoEntity[] = [];
       for (let i = 0; i < 2; i++) {
         const prestamo: PrestamoEntity = await prestamoRepository.save({
+          nombre: faker.commerce.productName(),
           monto: 10,
           interes: parseFloat(faker.finance.amount({ min: 1, max: 10, dec: 0 })),
           fechainicio: faker.date.past(),
@@ -185,6 +190,7 @@ describe('RecursoPrestamoService', () => {
       for (let i = 0; i < 2; i++) {
         const prestamo: PrestamoEntity ={
           id: "666" + i,
+          nombre: faker.commerce.productName(),
           monto: parseFloat(faker.finance.amount({ min: 10, max: 100, dec: 0 })),
           interes: parseFloat(faker.finance.amount({ min: 1, max: 10, dec: 0 })),
           fechainicio: faker.date.past(),
@@ -205,6 +211,7 @@ describe('RecursoPrestamoService', () => {
       let prestamoListAuxiliar : PrestamoEntity[] = [];
       for (let i = 0; i < 2; i++) {
         const prestamo: PrestamoEntity = await prestamoRepository.save({
+          nombre: faker.commerce.productName(),
           monto: recurso.valor + 1,
           interes: parseFloat(faker.finance.amount({ min: 1, max: 10, dec: 0 })),
           fechainicio: faker.date.past(),
@@ -221,6 +228,7 @@ describe('RecursoPrestamoService', () => {
     it('Debería desasociar el prestamo del recurso', async () =>
     {
       const prestamoAuxiliar: PrestamoEntity = await prestamoRepository.save({
+        nombre: faker.commerce.productName(),
         monto:10,
         interes: parseFloat(faker.finance.amount({ min: 1, max: 10, dec: 0 })),
         fechainicio: faker.date.past(),
@@ -250,6 +258,7 @@ describe('RecursoPrestamoService', () => {
     it('Debería lanzar una excepción si el prestamo no esta asociado al recurso', async () =>
     {
       const prestamoAuxiliar: PrestamoEntity = await prestamoRepository.save({
+        nombre: faker.commerce.productName(),
         monto:10,
         interes: parseFloat(faker.finance.amount({ min: 1, max: 10, dec: 0 })),
         fechainicio: faker.date.past(),
@@ -267,6 +276,7 @@ describe('RecursoPrestamoService', () => {
     it('Debería lanzar una excepción si el prestamo no esta pagado', async () =>
     {
       const prestamoAuxiliar: PrestamoEntity = await prestamoRepository.save({
+        nombre: faker.commerce.productName(),
         monto:10,
         interes: parseFloat(faker.finance.amount({ min: 1, max: 10, dec: 0 })),
         fechainicio: faker.date.past(),
@@ -305,6 +315,7 @@ describe('RecursoPrestamoService', () => {
     it('Debería lanzar una excepción si el recurso tiene prestamos asociados', async () =>
     {
       const prestamoAuxiliar: PrestamoEntity = await prestamoRepository.save({
+        nombre: faker.commerce.productName(),
         monto:10,
         interes: parseFloat(faker.finance.amount({ min: 1, max: 10, dec: 0 })),
         fechainicio: faker.date.past(),
