@@ -68,6 +68,7 @@ export class RecursoService
         // Se verifica que el recurso no tenga prestamos asociados.
         else if(recurso.prestamos.length > 0)
             throw new BusinessLogicException("El recurso tiene prestamos asociados", BusinessError.BAD_REQUEST);
+        
         await this.recursoRepository.remove(recurso);
     }
 }

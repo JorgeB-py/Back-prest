@@ -20,6 +20,7 @@ import { PrestamistaRecursoModule } from './prestamista-recurso/prestamista-recu
 import { PagoModule } from './pago/pago.module';
 import { PagoEntity } from './pago/pago.entity';
 import { PrestamoPagoModule } from './prestamo-pago/prestamo-pago.module';
+import { RecursoPrestamoModule } from './recurso-prestamo/recurso-prestamo.module';
 
 @Module({
   imports: [DeudorModule, PrestamoModule,
@@ -44,6 +45,7 @@ import { PrestamoPagoModule } from './prestamo-pago/prestamo-pago.module';
     PrestamistaRecursoModule,
     PagoModule,
     PrestamoPagoModule,
+    RecursoPrestamoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
