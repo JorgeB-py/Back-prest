@@ -2,8 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PrestamoEntity } from '../prestamo/prestamo.entity';
 import { PrestamistaEntity } from '../prestamista/prestamista.entity';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
+import { DeudorEntity } from 'src/deudor/deudor.entity';
 
 @Injectable()
 export class PrestamistaPrestamoService {
@@ -12,7 +13,10 @@ export class PrestamistaPrestamoService {
         private readonly prestamistaRepository: Repository<PrestamistaEntity>,
      
         @InjectRepository(PrestamoEntity)
-        private readonly prestamoRepository: Repository<PrestamoEntity>
+        private readonly prestamoRepository: Repository<PrestamoEntity>,
+
+        @InjectRepository(DeudorEntity)
+        private readonly deudorRepository: Repository<DeudorEntity>
     ) {}
 
     async addPrestamoPrestamista(prestamistaId: string, prestamoId: string): Promise<PrestamistaEntity> {
@@ -46,12 +50,49 @@ export class PrestamistaPrestamoService {
     }
      
     async findPrestamosByPrestamistaId(prestamistaId: string): Promise<PrestamoEntity[]> {
-        const prestamista: PrestamistaEntity = await this.prestamistaRepository.findOne({where: {id: prestamistaId}, relations: ["prestamos"]});
+        const prestamista: PrestamistaEntity = await this.prestamistaRepository.findOne({where: {id: prestamistaId}, relations: ["prestamos", "prestamos.historialpagos"]});
         if (!prestamista)
           throw new BusinessLogicException("El prestamista con el id proporcionado no fue encontrado", BusinessError.NOT_FOUND);
-        
         return prestamista.prestamos;
     }
+
+    async findDeudoresByPrestamistaId(prestamistaId: string): Promise<{ deudores: DeudorEntity[], interesesGanados: number }> {
+      const prestamos: PrestamoEntity[] = await this.findPrestamosByPrestamistaId(prestamistaId);
+      console.log(prestamos);
+    
+      // Extraer los IDs de los préstamos
+      const prestamoIds = prestamos.map(prestamo => prestamo.id);
+    
+      // Consultar deudores que tienen préstamos con los IDs encontrados
+      const deudores: DeudorEntity[] = await this.deudorRepository.find({
+        where: {
+          prestamos: {
+            id: In(prestamoIds)
+          }
+        },
+        relations: ['prestamos'],
+      });
+    
+      let interesesGanados = 0;
+    
+      prestamos.forEach(prestamo => {
+        console.log(prestamo.historialpagos);
+        if (prestamo.historialpagos) {
+          prestamo.historialpagos.forEach(pago => {
+            const fechaHaceUnMes = new Date();
+            fechaHaceUnMes.setMonth(fechaHaceUnMes.getMonth() - 1);
+      
+            if (new Date(pago.fecha) >= fechaHaceUnMes) {
+              interesesGanados += pago.interes;
+            }
+          });
+        }
+      });
+    
+      return { deudores, interesesGanados };
+    }
+    
+    
      
     async associatePrestamosPrestamista(prestamistaId: string, prestamos: PrestamoEntity[]): Promise<PrestamistaEntity> {
         const prestamista: PrestamistaEntity = await this.prestamistaRepository.findOne({where: {id: prestamistaId}, relations: ["prestamos"]});

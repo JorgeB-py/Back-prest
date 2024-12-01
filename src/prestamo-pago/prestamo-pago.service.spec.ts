@@ -43,6 +43,7 @@ describe('PrestamoPagoService', () => {
     }
 
     prestamo = await prestamoRepository.save({
+      nombre: faker.commerce.productName(),
       monto: parseFloat(faker.finance.amount({ min: 10, max: 100, dec: 0 })),
       interes: parseFloat(faker.finance.amount({ min: 1, max: 10, dec: 0 })),
       fechainicio: faker.date.past(),
@@ -69,6 +70,7 @@ describe('PrestamoPagoService', () => {
     });
 
     const newPrestamo: PrestamoEntity = await prestamoRepository.save({
+      nombre: faker.commerce.productName(),
       monto: parseFloat(faker.finance.amount({ min: 10, max: 100, dec: 0 })),
       interes: parseFloat(faker.finance.amount({ min: 1, max: 10, dec: 0 })),
       fechainicio: faker.date.past(),

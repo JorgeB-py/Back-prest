@@ -39,6 +39,8 @@ describe('DeudorPrestamoService', () => {
   const mockDeudor: DeudorEntity = {
     id: '1',
     nombrecompleto: 'Test Deudor',
+    cedula: '123456789',
+    situacionLaboral: 'Test Occupation',
     direccion: '123 Main St',
     telefono: '123456789',
     fecha: new Date(),
@@ -58,6 +60,7 @@ describe('DeudorPrestamoService', () => {
     deudor: mockDeudor,
     historialpagos: [],
     prestamista:null,
+    nombre:'Test Prestamo',
     recurso:null,
   };
 

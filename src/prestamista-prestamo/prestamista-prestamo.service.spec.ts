@@ -35,6 +35,7 @@ describe('PrestamistaPrestamoService', () => {
     prestamosList = [];
     for (let i = 0; i < 5; i++) {
       const prestamo: PrestamoEntity = await prestamoRepository.save({
+        nombre: faker.commerce.productName(),
         monto: parseFloat(faker.finance.amount({ dec: 0 })),
         interes: parseFloat(faker.finance.amount({ min: 1, max: 10, dec: 0 })),
         fechainicio: faker.date.recent(),
@@ -62,6 +63,7 @@ describe('PrestamistaPrestamoService', () => {
 
   it('addPrestamoPrestamista should add a prestamo to a prestamista', async () => {
     const newPrestamo: PrestamoEntity = await prestamoRepository.save({
+      nombre: faker.commerce.productName(),
       monto: parseFloat(faker.finance.amount({ dec: 0 })),
       interes: parseFloat(faker.finance.amount({ min: 5, max: 10, dec: 0 })),
       fechainicio: faker.date.recent(),
@@ -83,6 +85,7 @@ describe('PrestamistaPrestamoService', () => {
 
     expect(result.prestamos.length).toBe(1);
     expect(result.prestamos[0]).not.toBeNull();
+    expect(result.prestamos[0].nombre).toBe(newPrestamo.nombre);
     expect(result.prestamos[0].monto).toBeCloseTo(newPrestamo.monto,2);
     expect(result.prestamos[0].interes).toBeCloseTo(newPrestamo.interes,2);
     expect(result.prestamos[0].fechainicio).toStrictEqual(newPrestamo.fechainicio);
@@ -107,6 +110,7 @@ describe('PrestamistaPrestamoService', () => {
 
   it('addPrestamoPrestamista should throw an exception for an invalid prestamista', async () => {
     const newPrestamo: PrestamoEntity = await prestamoRepository.save({
+      nombre: faker.commerce.productName(),
       monto: parseFloat(faker.finance.amount({ dec: 0 })),
       interes: parseFloat(faker.finance.amount({ min: 5, max: 10, dec: 0 })),
       fechainicio: faker.date.recent(),
@@ -143,6 +147,7 @@ describe('PrestamistaPrestamoService', () => {
 
   it('findPrestamoByPrestamistaIdPrestamoId should throw an exception for a prestamo not associated to the prestamista', async () => {
     const newPrestamo: PrestamoEntity = await prestamoRepository.save({
+      nombre: faker.commerce.productName(),
       monto: parseFloat(faker.finance.amount({  dec: 0 })),
       interes: parseFloat(faker.finance.amount({ min: 5, max: 10, dec: 0 })),
       fechainicio: faker.date.recent(),
@@ -166,6 +171,7 @@ describe('PrestamistaPrestamoService', () => {
 
   it('associatePrestamosPrestamista should update prestamos list for a prestamista', async () => {
     const newPrestamo: PrestamoEntity = await prestamoRepository.save({
+      nombre: faker.commerce.productName(),
       monto: parseFloat(faker.finance.amount({  dec: 0 })),
       interes: parseFloat(faker.finance.amount({ min: 5, max: 10, dec: 0 })),
       fechainicio: faker.date.recent(),

@@ -10,6 +10,12 @@ export class DeudorEntity {
   nombrecompleto: string;
 
   @Column()
+  cedula: string;
+
+  @Column()
+  situacionLaboral: string;
+
+  @Column()
   direccion: string;
 
   @Column()

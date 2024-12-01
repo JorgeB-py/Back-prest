@@ -10,6 +10,9 @@ export class PrestamoEntity {
   id: string;
 
   @Column()
+  nombre: string;
+
+  @Column()
   monto: number;
 
   @Column()
