@@ -18,11 +18,15 @@ import {
   import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
   import { Roles } from '../user/roles.decorator';
   import { Role } from '../user/role.enum';
+import { PrestamoService } from '../prestamo/prestamo.service';
+import { PrestamistaService } from 'src/prestamista/prestamista.service';
   
   @Controller('prestamistas')
   @UseInterceptors(BusinessErrorsInterceptor)
   export class PrestamistaPrestamoController {
-    constructor(private readonly prestamistaPrestamoService: PrestamistaPrestamoService) {}
+    constructor(private readonly prestamistaPrestamoService: PrestamistaPrestamoService,
+      private readonly prestamoService: PrestamoService,
+    ) {}
   
     @Post(':prestamistaId/prestamos/:prestamoId')
     @UseGuards(JwtAuthGuard)
@@ -34,6 +38,15 @@ import {
       return await this.prestamistaPrestamoService.addPrestamoPrestamista(
         prestamistaId,
         prestamoId,
+      );
+    }
+
+    @Get(':prestamistaId/deudores')
+    @UseGuards(JwtAuthGuard)
+    @Roles(Role.PRESTAMISTA, Role.ADMIN)
+    async findDeudoresByPrestamistaId(@Param('prestamistaId') prestamistaId: string) {
+      return await this.prestamistaPrestamoService.findDeudoresByPrestamistaId(
+        prestamistaId
       );
     }
   

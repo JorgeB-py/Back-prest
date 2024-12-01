@@ -10,6 +10,10 @@ export class DeudorDto {
     @IsNotEmpty()
     direccion: string;
 
+    @IsString()
+    @IsNotEmpty()
+    cedula: string;
+
     @IsDate()
     @IsNotEmpty()
     @Transform(({ value }) => new Date(value), { toClassOnly: true })

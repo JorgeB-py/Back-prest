@@ -25,7 +25,9 @@ export class DeudorController {
     @UseGuards(JwtAuthGuard)
     @Roles(Role.PRESTAMISTA, Role.ADMIN)
     async findOne(@Param('deudorId') deudorId: string) {
-        return await this.deudorService.findOne(deudorId);
+        const deudor: DeudorEntity = await this.deudorService.findOne(deudorId);
+        const deudaTotal: number = await this.deudorService.calcularDeudaTotal(deudorId);
+        return { ...deudor, deudaTotal };
     }
 
     @Post()

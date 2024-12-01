@@ -1,10 +1,15 @@
 import { Transform } from 'class-transformer';
 import { IsArray, IsBoolean, IsDate, IsInt, IsNotEmpty, IsNumber, IsString, IsUrl } from 'class-validator';
+import { Column } from 'typeorm';
 export class PrestamoDto {
 
     @IsNumber()
     @IsNotEmpty()
     monto: number;
+
+    @Column()
+    @IsString()
+    nombre: string;
 
     @IsNumber()
     @IsNotEmpty()
@@ -21,9 +26,5 @@ export class PrestamoDto {
     @IsBoolean()
     @IsNotEmpty()
     pagado: Boolean;
-
-    @IsString()
-    @IsNotEmpty()
-    deudorId: string;
 
 }

@@ -4,7 +4,7 @@ import { PrestamoEntity } from '../prestamo/prestamo.entity';
 
 @Entity() 
 export class RecursoEntity {
-    @PrimaryGeneratedColumn('uuid') 
+    @PrimaryGeneratedColumn() 
     id: string;
 
     @Column()

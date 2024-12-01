@@ -67,8 +67,8 @@ describe('PrestamistaService', () => {
   });
 
   it('create should return a new prestamista', async () => {
-    const prestamista: PrestamistaEntity = {
-      id: "",
+    const prestamista= {
+      id: '200000000',
       nombre: faker.name.fullName(),
       direccion: faker.address.streetAddress(),
       telefono: faker.phone.number(),
@@ -78,7 +78,7 @@ describe('PrestamistaService', () => {
       saldo: faker.number.int({ min: 0, max: 10000 }),
       recursos: [],
       prestamos: [],
-    };
+    } as PrestamistaEntity;
 
     const newPrestamista: PrestamistaEntity = await service.create(prestamista);
     expect(newPrestamista).not.toBeNull();

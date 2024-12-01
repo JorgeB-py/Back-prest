@@ -12,6 +12,8 @@ describe('DeudorController', () => {
         id: '1',
         nombrecompleto: 'Juan Perez',
         email: 'jorgebtm26@gmail.com',
+        situacionLaboral: 'estudiante',
+        cedula: '123456789',
         fecha: new Date(),
         foto: 'foto.png',
         ocupacion: 'estudiante',
@@ -26,9 +28,11 @@ describe('DeudorController', () => {
             id: '2',
             nombrecompleto: 'Maria Lopez',
             direccion: 'Calle Verdadera 456',
+            cedula: '987654321',
             email: 'jorgebtm26@gmail.com',
             fecha: new Date(),
             foto: 'foto.png',
+            situacionLaboral: 'estudiante',
             ocupacion: 'estudiante',
             telefono: '987654321',
             prestamos: [],
@@ -37,12 +41,19 @@ describe('DeudorController', () => {
 
     const mockService = {
         findAll: jest.fn(() => Promise.resolve(mockDeudores)),
-        findOne: jest.fn((id: string) => Promise.resolve(mockDeudores.find((d) => d.id === id))),
+        findOne: jest.fn((id: string) => {const deudor = mockDeudores.find((d) => d.id === id)
+            const deudaTotal = 1000;
+            return Promise.resolve(deudor ? {...deudor, deudaTotal} : undefined);
+        }),
         create: jest.fn((deudor: DeudorEntity) => Promise.resolve({ ...deudor, id: '3' })),
         update: jest.fn((id: string, deudor: DeudorEntity) =>
             Promise.resolve({ ...deudor, id })
         ),
         delete: jest.fn(() => Promise.resolve()),
+        calcularDeudaTotal: jest.fn((id: string) => {
+            const deudor = mockDeudores.find((d) => d.id === id);
+            return Promise.resolve(deudor ? 1000 : undefined);
+        })
     };
 
     beforeEach(async () => {
@@ -76,14 +87,14 @@ describe('DeudorController', () => {
         it('should return a single deudor', async () => {
             const result = await controller.findOne('1');
             expect(service.findOne).toHaveBeenCalledWith('1');
-            expect(result).toEqual(mockDeudor);
+            expect(result).toEqual({ ...mockDeudor, deudaTotal: 1000 });
         });
 
         it('should return undefined if deudor is not found', async () => {
             jest.spyOn(service, 'findOne').mockResolvedValueOnce(undefined);
             const result = await controller.findOne('nonexistent');
             expect(service.findOne).toHaveBeenCalledWith('nonexistent');
-            expect(result).toBeUndefined();
+            expect(result).toStrictEqual({"deudaTotal": undefined});
         });
     });
 
@@ -92,6 +103,7 @@ describe('DeudorController', () => {
             const deudorDto: DeudorDto = {
                 nombrecompleto: 'Carlos Ruiz',
                 email:'jorgebtm26@gmail.com',
+                cedula: '123123123',
                 fecha: new Date(),
                 foto:'foto.png',
                 ocupacion:'estudiante',
@@ -110,6 +122,7 @@ describe('DeudorController', () => {
             const deudorDto: DeudorDto = {
                 nombrecompleto: 'Juan Perez Actualizado',
                 email:'jorgebtm26@gmail.com',
+                cedula: '111111111',
                 foto:'foto.png',
                 ocupacion:'estudiante',
                 fecha: new Date(),
