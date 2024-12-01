@@ -58,7 +58,6 @@ export class PrestamistaPrestamoService {
 
     async findDeudoresByPrestamistaId(prestamistaId: string): Promise<{ deudores: DeudorEntity[], interesesGanados: number }> {
       const prestamos: PrestamoEntity[] = await this.findPrestamosByPrestamistaId(prestamistaId);
-      console.log(prestamos);
     
       // Extraer los IDs de los préstamos
       const prestamoIds = prestamos.map(prestamo => prestamo.id);
@@ -76,7 +75,6 @@ export class PrestamistaPrestamoService {
       let interesesGanados = 0;
     
       prestamos.forEach(prestamo => {
-        console.log(prestamo.historialpagos);
         if (prestamo.historialpagos) {
           prestamo.historialpagos.forEach(pago => {
             const fechaHaceUnMes = new Date();
