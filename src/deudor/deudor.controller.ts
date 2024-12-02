@@ -33,7 +33,7 @@ export class DeudorController {
 
     @Post()
     @UseGuards(JwtAuthGuard)
-    @Roles(Role.PRESTAMISTA)
+    @Roles(Role.PRESTAMISTA,Role.ADMIN)
     async create(@Body() deudorDto: DeudorDto) {
         const deudor: DeudorEntity = plainToInstance(DeudorEntity, deudorDto);
         return await this.deudorService.create(deudor);
