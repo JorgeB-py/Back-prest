@@ -26,7 +26,7 @@ export class PrestamoService {
         return await this.prestamoRepository.save(prestamo);
     }
     async update(id: string, prestamo: PrestamoEntity): Promise<PrestamoEntity> {
-        const persistedprestamo: PrestamoEntity = await this.prestamoRepository.findOne({where:{id}});
+        const persistedprestamo: PrestamoEntity = await this.prestamoRepository.findOne({where:{id}, relations: ["deudor", "historialpagos"]});
         if (!persistedprestamo)
           throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND);
         

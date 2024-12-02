@@ -8,6 +8,7 @@ import { PrestamoPagoController } from './prestamo-pago.controller';
 @Module({
   providers: [PrestamoPagoService],
   imports: [TypeOrmModule.forFeature([PrestamoEntity, PagoEntity])],
-  controllers: [PrestamoPagoController]
+  controllers: [PrestamoPagoController],
+  exports: [PrestamoPagoService]
 })
 export class PrestamoPagoModule {}

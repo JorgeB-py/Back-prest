@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ba8d4959-6d54-467a-8c5b-ff7e9a9004c3",
+		"_postman_id": "1c4d6907-8e5e-435f-9772-6d57785cfdc7",
 		"name": "PrestamistaPrestamo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "34867910"
@@ -41,7 +41,7 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/auth/login",
+					"raw": "{{baseUrl}}/users/login",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -118,7 +118,8 @@
 							"    pm.response.to.have.status(201);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -132,7 +133,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"monto\":2000,\r\n    \"interes\":5,\r\n    \"fechainicio\":\"2024/05/01\",\r\n    \"fechafin\":\"2024/06/01\",\r\n    \"pagado\":true,\r\n    \"deudorId\":\"1\"\r\n}",
+					"raw": "{\r\n    \"nombre\":\"estudios2\",\r\n    \"monto\":2000,\r\n    \"interes\":5,\r\n    \"fechainicio\":\"2024-05-01\",\r\n    \"fechafin\":\"2024-06-01\",\r\n    \"pagado\":false\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -165,7 +166,8 @@
 							"    pm.response.to.have.status(201);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -179,7 +181,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"monto\":3000,\r\n    \"interes\":5,\r\n    \"fechainicio\":\"2024/05/01\",\r\n    \"fechafin\":\"2024/06/01\",\r\n    \"pagado\":true,\r\n    \"deudorId\":\"1\"\r\n}",
+					"raw": "{\r\n    \"nombre\":\"estudios2\",\r\n    \"monto\":2000,\r\n    \"interes\":5,\r\n    \"fechainicio\":\"2024-05-01\",\r\n    \"fechafin\":\"2024-06-01\",\r\n    \"pagado\":false\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -295,7 +297,8 @@
 							"    pm.expect(data.message).to.eql(\"The prestamista with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -308,13 +311,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/00000000-0000-0000-0000-000000000000/prestamos/{{prestamo_id}}",
+					"raw": "{{baseUrl}}/prestamistas/00000000000000000000000000000000/prestamos/{{prestamo_id}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"prestamistas",
-						"00000000-0000-0000-0000-000000000000",
+						"00000000000000000000000000000000",
 						"prestamos",
 						"{{prestamo_id}}"
 					]
@@ -419,7 +422,8 @@
 							"    pm.expect(data.message).to.eql(\"The prestamista with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -432,58 +436,15 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/00000000-0000-0000-0000-000000000000/prestamos/{{prestamo_id}}",
+					"raw": "{{baseUrl}}/prestamistas/00000000000000000000000000000000/prestamos/{{prestamo_id}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"prestamistas",
-						"00000000-0000-0000-0000-000000000000",
+						"00000000000000000000000000000000",
 						"prestamos",
 						"{{prestamo_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get a prestamo non-associated to a prestamista",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 412\", function () {",
-							"    pm.response.to.have.status(412);",
-							"});",
-							"",
-							"pm.test(\"Get expected error message\", function () {",
-							"    var data = pm.response.json();",
-							"    pm.expect(data.message).to.eql(\"The prestamo with the given id is not associated to the prestamista\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					}
-				],
-				"url": {
-					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/prestamos/{{prestamo_id_2}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"prestamistas",
-						"{{prestamista_id}}",
-						"prestamos",
-						"{{prestamo_id_2}}"
 					]
 				}
 			},
@@ -543,7 +504,8 @@
 							"    pm.expect(data.message).to.eql(\"The prestamista with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -556,13 +518,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/00000000-0000-0000-0000-000000000000/prestamos/",
+					"raw": "{{baseUrl}}/prestamistas/00000000000000000000000000000000/prestamos/",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"prestamistas",
-						"00000000-0000-0000-0000-000000000000",
+						"00000000000000000000000000000000",
 						"prestamos",
 						""
 					]
@@ -683,7 +645,8 @@
 							"    pm.expect(data.message).to.eql(\"The prestamista with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -705,20 +668,19 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/00000000-0000-0000-0000-000000000000/prestamos",
+					"raw": "{{baseUrl}}/prestamistas/00000000000000000000000000000000/prestamos",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"prestamistas",
-						"00000000-0000-0000-0000-000000000000",
+						"00000000000000000000000000000000",
 						"prestamos"
 					]
 				}
 			},
 			"response": []
 		},
-		
 		{
 			"name": "Add a prestamo to a prestamista",
 			"event": [
@@ -811,7 +773,8 @@
 							"    pm.expect(data.message).to.eql(\"The prestamista with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
@@ -824,13 +787,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/00000000-0000-0000-0000-000000000000/prestamos/{{prestamo_id}}",
+					"raw": "{{baseUrl}}/prestamistas/00000000000000000000000000000000/prestamos/{{prestamo_id}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"prestamistas",
-						"00000000-0000-0000-0000-000000000000",
+						"00000000000000000000000000000000",
 						"prestamos",
 						"{{prestamo_id}}"
 					]
@@ -876,121 +839,6 @@
 						"{{prestamista_id}}",
 						"prestamos",
 						"00000000000000000000000000000000"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete an prestamo non-associated to a prestamista",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 412\", function () {",
-							"    pm.response.to.have.status(412);",
-							"});",
-							"",
-							"pm.test(\"Get expected error message\", function () {",
-							"    var data = pm.response.json();",
-							"    pm.expect(data.message).to.eql(\"The prestamo with the given id is not associated to the prestamista\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					}
-				],
-				"url": {
-					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/prestamos/{{prestamo_id_2}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"prestamistas",
-						"{{prestamista_id}}",
-						"prestamos",
-						"{{prestamo_id_2}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete an prestamo ",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 204\", function () {",
-							"    pm.response.to.have.status(204);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					}
-				],
-				"url": {
-					"raw": "{{baseUrl}}/prestamo/{{prestamo_id}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"prestamos",
-						"{{prestamo_id}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete a prestamista",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 204\", function () {",
-							"    pm.response.to.have.status(204);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}"
-					}
-				],
-				"url": {
-					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"prestamistas",
-						"{{prestamista_id}}"
 					]
 				}
 			},

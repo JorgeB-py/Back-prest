@@ -24,11 +24,10 @@ export class DeudorService {
     for (let i = 0; i < deudor.prestamos.length; i++) {
       deudaTotal += deudor.prestamos[i].monto;
     }
-    console.log("deudaTotal", deudaTotal);
     return deudaTotal;
   }
   async findOne(id: string): Promise<DeudorEntity> {
-    const deudor: DeudorEntity = await this.deudorRepository.findOne({ where: { id }, relations: ["prestamos"] });
+    const deudor: DeudorEntity = await this.deudorRepository.findOne({ where: { id }, relations: ["prestamos.historialpagos"] });
     if (!deudor) {
       throw new BusinessLogicException("The deudor with the given id was not found", BusinessError.NOT_FOUND);
     }

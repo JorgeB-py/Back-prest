@@ -15,7 +15,7 @@ export class PrestamoPagoController {
     constructor(private readonly prestamoPagoService: PrestamoPagoService){}
     
     @UseGuards(JwtAuthGuard)
-    @Roles(Role.ADMIN,Role.DEUDOR)
+    @Roles(Role.ADMIN,Role.DEUDOR, Role.PRESTAMISTA)
     @Post(':prestamoId/pagos/:pagoId')
     async addPagoPrestamo(@Param('prestamoId') prestamoId: string, @Param('pagoId') pagoId: string){
         return await this.prestamoPagoService.addPagoPrestamo(prestamoId, pagoId);
@@ -36,7 +36,7 @@ export class PrestamoPagoController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Roles(Role.ADMIN,Role.DEUDOR)
+    @Roles(Role.ADMIN,Role.DEUDOR, Role.PRESTAMISTA)
     @Put(':prestamoId/pagos')
     async associatePagosPrestamo(@Body() pagosDto: PagoDto[], @Param('prestamoId') prestamoId: string){
         const pagos = plainToInstance(PagoEntity, pagosDto)
