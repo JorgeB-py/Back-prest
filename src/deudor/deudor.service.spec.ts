@@ -85,7 +85,7 @@ describe('DeudorService', () => {
       mockRepository.findOne.mockResolvedValue(mockDeudor);
       const result = await service.findOne('3');
       expect(result).toEqual(mockDeudor);
-      expect(repository.findOne).toHaveBeenCalledWith({ where: { id: '3' }, relations: ['prestamos'] });
+      expect(repository.findOne).toHaveBeenCalledWith({ where: { id: '3' }, relations: ['prestamos.historialpagos'] });
     });
 
     it('should throw an exception if deudor is not found', async () => {
