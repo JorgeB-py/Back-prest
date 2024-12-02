@@ -22,7 +22,7 @@ export class PrestamoController {
 
     @Get(':prestamoId')
     @UseGuards(JwtAuthGuard)
-    @Roles(Role.PRESTAMISTA, Role.ADMIN)
+    @Roles(Role.PRESTAMISTA,Role.DEUDOR, Role.ADMIN)
     async findOne(@Param('prestamoId') prestamoId: string) {
         return await this.prestamoService.findOne(prestamoId);
     }

@@ -1,22 +1,40 @@
 {
-	"id": "3468689b-1f6e-490e-ba09-404140e6e5e1",
+	"id": "fcd47d12-e3ac-43b8-9d22-0e0de3d0f1b3",
 	"name": "Recurso",
-	"timestamp": "2024-12-01T22:57:27.929Z",
+	"timestamp": "2024-12-02T16:41:53.765Z",
 	"collection_id": "40028169-fd6382e3-29f2-4608-a3ab-13754068bcbd",
 	"folder_id": 0,
-	"environment_id": "0",
+	"environment_id": "40028169-a9e52095-55db-4900-9a45-3efd3d5bf7d8",
 	"totalPass": 12,
 	"delay": 0,
 	"persist": true,
 	"status": "finished",
-	"startedAt": "2024-12-01T22:57:27.640Z",
+	"startedAt": "2024-12-02T16:41:53.487Z",
 	"totalFail": 0,
 	"results": [
+		{
+			"id": "3118b13e-4a27-4ee7-9be0-d984ea87a147",
+			"name": "Login Copy",
+			"url": "http://localhost:3000/users/login",
+			"time": 4,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4
+			],
+			"allTests": [
+				{}
+			]
+		},
 		{
 			"id": "11679d76-abbc-4140-b120-ca61ea5f74ae",
 			"name": "Añadir un Recurso",
 			"url": "http://localhost:3000/recursos",
-			"time": 42,
+			"time": 17,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -31,7 +49,7 @@
 				}
 			},
 			"times": [
-				42
+				17
 			],
 			"allTests": [
 				{
@@ -42,7 +60,7 @@
 		{
 			"id": "53a4a960-3ae5-449b-a6ec-e366b581d187",
 			"name": "Actulizar un Recurso existente",
-			"url": "http://localhost:3000/recursos/1",
+			"url": "http://localhost:3000/recursos/8",
 			"time": 9,
 			"responseCode": {
 				"code": 200,
@@ -103,7 +121,7 @@
 			"id": "c10b9e38-6a5a-4c31-8760-7176728c8ae4",
 			"name": "Obtener Todos los Recursos",
 			"url": "http://localhost:3000/recursos",
-			"time": 6,
+			"time": 5,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -123,7 +141,7 @@
 				}
 			},
 			"times": [
-				6
+				5
 			],
 			"allTests": [
 				{
@@ -135,7 +153,7 @@
 		{
 			"id": "34bd9919-dfd5-465e-9b8a-276d3f86b82c",
 			"name": "Obtener un recurso",
-			"url": "http://localhost:3000/recursos/1",
+			"url": "http://localhost:3000/recursos/8",
 			"time": 6,
 			"responseCode": {
 				"code": 200,
@@ -163,7 +181,7 @@
 			"id": "13d3120f-6a9a-42a6-a2d7-9dc5832f96a7",
 			"name": "Obtener Recurso que no existe",
 			"url": "http://localhost:3000/recursos/666",
-			"time": 4,
+			"time": 5,
 			"responseCode": {
 				"code": 404,
 				"name": "Not Found"
@@ -183,7 +201,7 @@
 				}
 			},
 			"times": [
-				4
+				5
 			],
 			"allTests": [
 				{
@@ -228,8 +246,8 @@
 		{
 			"id": "1e6d99df-2e3a-4640-b1bb-27ab4a3328d5",
 			"name": "Eliminar Recurso",
-			"url": "http://localhost:3000/recursos/recurso/1",
-			"time": 9,
+			"url": "http://localhost:3000/recursos/recurso/8",
+			"time": 11,
 			"responseCode": {
 				"code": 204,
 				"name": "No Content"
@@ -244,7 +262,7 @@
 				}
 			},
 			"times": [
-				9
+				11
 			],
 			"allTests": [
 				{
@@ -254,9 +272,13 @@
 		}
 	],
 	"count": 1,
-	"totalTime": 85,
+	"totalTime": 66,
 	"collection": {
 		"requests": [
+			{
+				"id": "3118b13e-4a27-4ee7-9be0-d984ea87a147",
+				"method": "POST"
+			},
 			{
 				"id": "11679d76-abbc-4140-b120-ca61ea5f74ae",
 				"method": "POST"
