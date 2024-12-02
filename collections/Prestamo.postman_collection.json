@@ -7,13 +7,31 @@
 	},
 	"item": [
 		{
-			"name": "Add a Prestamo",
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var response = pm.response.json();\r",
+							"if (response.token) {\r",
+							"    pm.globals.set(\"jwtToken\", response.token);\r",
+							"    console.log(\"Token guardado en variable de entorno:\", response.token);\r",
+							"} else {\r",
+							"    console.log(\"No se encontró el token en la respuesta\");\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"nombrePrestamo\": \"Prestamo casa\",\r\n   \"cantidadPrestada\": 150.0,\r\n   \"fechaPago\": \"11-11-2021\",\r\n   \"estado\": \"Cancelado\",\r\n   \"balance\": 0,\r\n   \"numCuotas\": 10\r\n}",
+					"raw": "{\r\n    \"username\":\"prestamista\",\r\n    \"password\":\"prestamista\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,12 +39,60 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/prestamos",
+					"raw": "http://localhost:3000/users/login",
+					"protocol": "http",
 					"host": [
-						"{{baseURL}}"
+						"localhost"
 					],
+					"port": "3000",
 					"path": [
-						"prestamos"
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a Prestamo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"nombre\": \"Prestamo casa\",\r\n   \"monto\": 150.0,\r\n   \"interes\": 15,\r\n   \"fechainicio\": \"2024-11-3\",\r\n   \"fechafin\": \"2024-12-12\",\r\n   \"pagado\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/prestamo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"prestamo"
 					]
 				}
 			},
@@ -66,16 +132,37 @@
 		},
 		{
 			"name": "Get all Prestamos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of prestamos > ' + 0, function () {\r",
+							"   var data = pm.response.json()\r",
+							"   pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseURL}}/prestamos",
+					"raw": "http://localhost:3000/prestamo",
+					"protocol": "http",
 					"host": [
-						"{{baseURL}}"
+						"localhost"
 					],
+					"port": "3000",
 					"path": [
-						"prestamos"
+						"prestamo"
 					]
 				}
 			},
@@ -106,17 +193,33 @@
 		},
 		{
 			"name": "Get Prestamo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/prestamos/{{prestamo_id}}",
+					"raw": "http://localhost:3000/prestamo/1",
+					"protocol": "http",
 					"host": [
-						"{{baseUrl}}"
+						"localhost"
 					],
+					"port": "3000",
 					"path": [
-						"prestamos",
-						"{{prestamo_id}}"
+						"prestamo",
+						"1"
 					]
 				}
 			},
@@ -148,17 +251,38 @@
 		},
 		{
 			"name": "Get an invalid Prestamo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The prestamo with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/prestamos/00000000-0000-0000-0000-000000000000",
+					"raw": "http://localhost:3000/prestamo/100",
+					"protocol": "http",
 					"host": [
-						"{{baseUrl}}"
+						"localhost"
 					],
+					"port": "3000",
 					"path": [
-						"prestamos",
-						"00000000-0000-0000-0000-000000000000"
+						"prestamo",
+						"100"
 					]
 				}
 			},
@@ -190,12 +314,26 @@
 		},
 		{
 			"name": "Update a Prestamo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"nombrePrestamo\": \"Prestamo casa en el Palmar\",\r\n   \"cantidadPrestada\": 150.0,\r\n   \"fechaPago\": \"11-11-2021\",\r\n   \"estado\": \"Cancelado\",\r\n   \"balance\": 0,\r\n   \"numCuotas\": 10\r\n}",
+					"raw": "{\r\n   \"nombre\": \"Prestamo casa renovada\",\r\n   \"monto\": 150.0,\r\n   \"interes\": 15,\r\n   \"fechainicio\": \"2024-11-3\",\r\n   \"fechafin\": \"2024-12-12\",\r\n   \"pagado\": false\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -203,13 +341,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/prestamos/{{prestamo_id}}",
+					"raw": "http://localhost:3000/prestamo/1",
+					"protocol": "http",
 					"host": [
-						"{{baseUrl}}"
+						"localhost"
 					],
+					"port": "3000",
 					"path": [
-						"prestamos",
-						"{{prestamo_id}}"
+						"prestamo",
+						"1"
 					]
 				}
 			},
@@ -250,12 +390,31 @@
 		},
 		{
 			"name": "Update an invalid Prestamo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The prestamo with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"nombrePrestamo\": \"Prestamo casa en el Palmar\",\r\n   \"cantidadPrestada\": 150.0,\r\n   \"fechaPago\": \"11-11-2021\",\r\n   \"estado\": \"Cancelado\",\r\n   \"balance\": 0,\r\n   \"numCuotas\": 10\r\n}",
+					"raw": "{\r\n   \"nombre\": \"Prestamo casa renovada\",\r\n   \"monto\": 150.0,\r\n   \"interes\": 15,\r\n   \"fechainicio\": \"2024-11-3\",\r\n   \"fechafin\": \"2024-12-12\",\r\n   \"pagado\": false\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -263,13 +422,15 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/prestamos/00000000-0000-0000-0000-000000000000",
+					"raw": "http://localhost:3000/prestamo/100",
+					"protocol": "http",
 					"host": [
-						"{{baseUrl}}"
+						"localhost"
 					],
+					"port": "3000",
 					"path": [
-						"prestamos",
-						"00000000-0000-0000-0000-000000000000"
+						"prestamo",
+						"100"
 					]
 				}
 			},
@@ -310,17 +471,33 @@
 		},
 		{
 			"name": "Delete a Prestamo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/prestamos/{{prestamo_id}}",
+					"raw": "http://localhost:3000/prestamo/1",
+					"protocol": "http",
 					"host": [
-						"{{baseUrl}}"
+						"localhost"
 					],
+					"port": "3000",
 					"path": [
-						"prestamos",
-						"{{prestamo_id}}"
+						"prestamo",
+						"1"
 					]
 				}
 			},
@@ -352,17 +529,38 @@
 		},
 		{
 			"name": "Delete an invalid Prestamo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The prestamo with the given id was not found\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{baseUrl}}/prestamos/00000000-0000-0000-0000-000000000000",
+					"raw": "http://localhost:3000/prestamo/100",
+					"protocol": "http",
 					"host": [
-						"{{baseUrl}}"
+						"localhost"
 					],
+					"port": "3000",
 					"path": [
-						"prestamos",
-						"00000000-0000-0000-0000-000000000000"
+						"prestamo",
+						"100"
 					]
 				}
 			},
@@ -391,6 +589,38 @@
 					"body": "{\r\n   \"statusCode\": 404,\r\n   \"message\": \"The prestamo with the given id was not found\"\r\n}"
 				}
 			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwtToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
