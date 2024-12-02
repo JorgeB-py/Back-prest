@@ -36,7 +36,7 @@ describe('PrestamoPagoService', () => {
     for(let i = 0; i < 5; i++){
         const pago: PagoEntity = await pagoRepository.save({
         fecha: faker.date.anytime(),
-        capital: faker.number.int(),
+        capital: parseFloat(faker.finance.amount({ min: 0, max: 10, dec: 0 })),
         interes: faker.number.int()
         })
         pagosList.push(pago);
@@ -65,7 +65,7 @@ describe('PrestamoPagoService', () => {
   it('addPagoPrestamo should add an pago to a prestamo', async () => {
     const newPago: PagoEntity = await pagoRepository.save({
       fecha: faker.date.anytime(),
-      capital: faker.number.int(),
+      capital: parseFloat(faker.finance.amount({ min: 0, max: 10, dec: 0 })),
       interes: faker.number.int()
     });
 
@@ -107,7 +107,7 @@ describe('PrestamoPagoService', () => {
   it('addPagoPrestamo should throw an exception for an invalid prestamo', async () => {
     const newPago: PagoEntity = await pagoRepository.save({
       fecha: faker.date.anytime(),
-      capital: faker.number.int(),
+      capital: parseFloat(faker.finance.amount({ min: 0, max: 10, dec: 0 })),
       interes: faker.number.int()
     });
 
@@ -136,7 +136,7 @@ describe('PrestamoPagoService', () => {
   it('findPagoByPrestamoIdPagoId should throw an exception for an pago not associated to the prestamo', async () => {
     const newPago: PagoEntity = await pagoRepository.save({
       fecha: faker.date.anytime(),
-      capital: faker.number.int(),
+      capital: parseFloat(faker.finance.amount({ min: 0, max: 10, dec: 0 })),
       interes: faker.number.int()
     });
 
@@ -156,7 +156,7 @@ describe('PrestamoPagoService', () => {
   it('associatePagosPrestamo should update pagos list for a prestamo', async () => {
     const newPago: PagoEntity = await pagoRepository.save({
       fecha: faker.date.anytime(),
-      capital: faker.number.int(),
+      capital: parseFloat(faker.finance.amount({ min: 0, max: 10, dec: 0 })),
       interes: faker.number.int()
     });
 
@@ -173,7 +173,7 @@ describe('PrestamoPagoService', () => {
   it('associatePagosPrestamo should throw an exception for an invalid prestamo', async () => {
     const newPago: PagoEntity = await pagoRepository.save({
       fecha: faker.date.anytime(),
-      capital: faker.number.int(),
+      capital: parseFloat(faker.finance.amount({ min: 0, max: 10, dec: 0 })),
       interes: faker.number.int()
     });
 
@@ -205,11 +205,34 @@ describe('PrestamoPagoService', () => {
   it('deletePagoToPrestamo should thrown an exception for an non asocciated pago', async () => {
     const newPago: PagoEntity = await pagoRepository.save({
       fecha: faker.date.anytime(),
-      capital: faker.number.int(),
+      capital: parseFloat(faker.finance.amount({ min: 0, max: 10, dec: 0 })),
       interes: faker.number.int()
     });
 
     await expect(()=> service.deletePagoPrestamo(prestamo.id, newPago.id)).rejects.toHaveProperty("message", "The pago with the given id is not associated to the prestamo"); 
   }); 
+  
+  it('addPagoPrestamo should thrown an exception for a pago higher than the amount',async ()=>{
+    const newPago: PagoEntity = await pagoRepository.save({
+      fecha: faker.date.anytime(),
+      capital: prestamo.monto+1,
+      interes: faker.number.int()
+    });
+    await expect(()=>service.addPagoPrestamo(prestamo.id,newPago.id)).rejects.toHaveProperty("message","The pago.capital can't be higher than prestamo.monto")
+  })
 
+  it('associatePagosPrestamo should thrown an exception for a listo of pago higher than the amount',async ()=>{
+    const newPago: PagoEntity = await pagoRepository.save({
+      fecha: faker.date.anytime(),
+      capital: prestamo.monto,
+      interes: faker.number.int()
+    });
+    const newPago2: PagoEntity = await pagoRepository.save({
+      fecha: faker.date.anytime(),
+      capital: prestamo.monto,
+      interes: faker.number.int()
+    });
+    await expect(()=>service.associatePagosPrestamo(prestamo.id,[newPago,newPago2])).rejects.toHaveProperty("message","The pago.capital can't be higher than prestamo.monto")
+  })
 });
+

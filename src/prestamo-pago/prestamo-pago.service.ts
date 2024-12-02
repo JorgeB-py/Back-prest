@@ -8,86 +8,100 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class PrestamoPagoService {
 
-    constructor(
-        @InjectRepository(PrestamoEntity)
-        private readonly prestamoRepository: Repository<PrestamoEntity>,
+  constructor(
+    @InjectRepository(PrestamoEntity)
+    private readonly prestamoRepository: Repository<PrestamoEntity>,
 
-        @InjectRepository(PagoEntity)
-        private readonly pagoRepository: Repository<PagoEntity>
-        
-    ){}
+    @InjectRepository(PagoEntity)
+    private readonly pagoRepository: Repository<PagoEntity>
 
-    async addPagoPrestamo(prestamoId: string, pagoId: string): Promise<PrestamoEntity> {
-        const pago: PagoEntity = await this.pagoRepository.findOne({where: {id: pagoId}});
-        if (!pago)
-          throw new BusinessLogicException("The pago with the given id was not found", BusinessError.NOT_FOUND);
-      
-        const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({where: {id: prestamoId}, relations: ["historialpagos"]})
-        if (!prestamo)
-          throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND);
+  ) { }
+
+  async addPagoPrestamo(prestamoId: string, pagoId: string): Promise<PrestamoEntity> {
+    const pago: PagoEntity = await this.pagoRepository.findOne({ where: { id: pagoId } });
+    if (!pago)
+      throw new BusinessLogicException("The pago with the given id was not found", BusinessError.NOT_FOUND);
+
+    const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({ where: { id: prestamoId }, relations: ["historialpagos"] })
+    if (!prestamo)
+      throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND);
+
+    if (prestamo.monto < pago.capital) {
+      throw new BusinessLogicException("The pago.capital can't be higher than prestamo.monto", BusinessError.NOT_FOUND);
+    }
+    prestamo.monto -= pago.capital
+    prestamo.historialpagos = [...prestamo.historialpagos, pago];
+    return await this.prestamoRepository.save(prestamo);
+  }
+
+  async findPagoByPrestamoIdPagoId(prestamoId: string, pagoId: string): Promise<PagoEntity> {
+    const pago: PagoEntity = await this.pagoRepository.findOne({ where: { id: pagoId } });
+    if (!pago)
+      throw new BusinessLogicException("The pago with the given id was not found", BusinessError.NOT_FOUND)
+
+    const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({ where: { id: prestamoId }, relations: ["historialpagos"] });
+    if (!prestamo)
+      throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND)
+
+    const prestamoPago: PagoEntity = prestamo.historialpagos.find(e => e.id === pago.id);
+
+    if (!prestamoPago)
+      throw new BusinessLogicException("The pago with the given id is not associated to the prestamo", BusinessError.PRECONDITION_FAILED)
+
+    return prestamoPago;
+  }
+
+  async findPagosByPrestamoId(prestamoId: string): Promise<PagoEntity[]> {
+    const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({ where: { id: prestamoId }, relations: ["historialpagos"] });
+    if (!prestamo)
+      throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND)
+
+    return prestamo.historialpagos;
+  }
+
+  async associatePagosPrestamo(prestamoId: string, pagos: PagoEntity[]): Promise<PrestamoEntity> {
+    const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({ where: { id: prestamoId }, relations: ["historialpagos"] });
     
-        prestamo.historialpagos = [...prestamo.historialpagos, pago];
-        return await this.prestamoRepository.save(prestamo);
+    if (!prestamo)
+      throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND)
+
+    // Le sumamos los pagos a reemplazar, a la deuda
+    let totalPagosCapital = 0;
+    prestamo.historialpagos.forEach(element => {
+      totalPagosCapital += element.capital
+    });
+    prestamo.monto += totalPagosCapital;
+
+    for (let i = 0; i < pagos.length; i++) {
+      const pago: PagoEntity = await this.pagoRepository.findOne({ where: { id: pagos[i].id } });
+      if (!pago) {
+        throw new BusinessLogicException("The pago with the given id was not found", BusinessError.NOT_FOUND)
       }
-
-      async findPagoByPrestamoIdPagoId(prestamoId: string, pagoId: string): Promise<PagoEntity> {
-        const pago: PagoEntity = await this.pagoRepository.findOne({where: {id: pagoId}});
-        if (!pago)
-          throw new BusinessLogicException("The pago with the given id was not found", BusinessError.NOT_FOUND)
-       
-        const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({where: {id: prestamoId}, relations: ["historialpagos"]});
-        if (!prestamo)
-          throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND)
-   
-        const prestamoPago: PagoEntity = prestamo.historialpagos.find(e => e.id === pago.id);
-   
-        if (!prestamoPago)
-          throw new BusinessLogicException("The pago with the given id is not associated to the prestamo", BusinessError.PRECONDITION_FAILED)
-   
-        return prestamoPago;
+      if (prestamo.monto < pago.capital) {
+        throw new BusinessLogicException("The pago.capital can't be higher than prestamo.monto", BusinessError.NOT_FOUND);
       }
+      prestamo.monto -= pago.capital // Le restamos los pagos actualizados
+    }
+    prestamo.historialpagos = pagos;
+    return await this.prestamoRepository.save(prestamo);
+  }
 
-      async findPagosByPrestamoId(prestamoId: string): Promise<PagoEntity[]> {
-        const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({where: {id: prestamoId}, relations: ["historialpagos"]});
-        if (!prestamo)
-          throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND)
-       
-        return prestamo.historialpagos;
-      }
+  async deletePagoPrestamo(prestamoId: string, pagoId: string) {
+    const pago: PagoEntity = await this.pagoRepository.findOne({ where: { id: pagoId } });
+    if (!pago)
+      throw new BusinessLogicException("The pago with the given id was not found", BusinessError.NOT_FOUND)
 
-      async associatePagosPrestamo(prestamoId: string, pagos: PagoEntity[]): Promise<PrestamoEntity> {
-        const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({where: {id: prestamoId}, relations: ["historialpagos"]});
-    
-        if (!prestamo)
-          throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND)
-    
-        for (let i = 0; i < pagos.length; i++) {
-          const pago: PagoEntity = await this.pagoRepository.findOne({where: {id: pagos[i].id}});
-          if (!pago)
-            throw new BusinessLogicException("The pago with the given id was not found", BusinessError.NOT_FOUND)
-        }
-    
-        prestamo.historialpagos = pagos;
-        return await this.prestamoRepository.save(prestamo);
-      }
+    const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({ where: { id: prestamoId }, relations: ["historialpagos"] });
+    if (!prestamo)
+      throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND)
 
-      async deletePagoPrestamo(prestamoId: string, pagoId: string){
-        const pago: PagoEntity = await this.pagoRepository.findOne({where: {id: pagoId}});
-        if (!pago)
-          throw new BusinessLogicException("The pago with the given id was not found", BusinessError.NOT_FOUND)
-    
-        const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({where: {id: prestamoId}, relations: ["historialpagos"]});
-        if (!prestamo)
-          throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND)
-    
-        const prestamoPago: PagoEntity = prestamo.historialpagos.find(e => e.id === pago.id);
-    
-        if (!prestamoPago)
-            throw new BusinessLogicException("The pago with the given id is not associated to the prestamo", BusinessError.PRECONDITION_FAILED)
- 
-        prestamo.historialpagos = prestamo.historialpagos.filter(e => e.id !== pagoId);
-        await this.prestamoRepository.save(prestamo);
-    } 
+    const prestamoPago: PagoEntity = prestamo.historialpagos.find(e => e.id === pago.id);
 
-    
+    if (!prestamoPago) {
+      throw new BusinessLogicException("The pago with the given id is not associated to the prestamo", BusinessError.PRECONDITION_FAILED)
+    };
+    prestamo.monto += pago.capital;
+    prestamo.historialpagos = prestamo.historialpagos.filter(e => Number(e.id) !== Number(pagoId))
+    await this.prestamoRepository.save(prestamo);
+  }
 }
