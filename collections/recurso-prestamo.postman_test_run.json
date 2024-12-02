@@ -1,7 +1,7 @@
 {
-	"id": "f511dfa8-ee9c-483a-aa71-c1e6c85cf7b8",
+	"id": "93867cb8-02bf-4632-a2ed-a65f724202b4",
 	"name": "recurso-prestamo",
-	"timestamp": "2024-12-02T01:57:10.776Z",
+	"timestamp": "2024-12-02T16:37:29.063Z",
 	"collection_id": "40028169-b93ffcdc-e025-47ee-b390-fdacbd857397",
 	"folder_id": 0,
 	"environment_id": "40028169-a9e52095-55db-4900-9a45-3efd3d5bf7d8",
@@ -9,14 +9,14 @@
 	"delay": 0,
 	"persist": true,
 	"status": "finished",
-	"startedAt": "2024-12-02T01:57:10.219Z",
+	"startedAt": "2024-12-02T16:37:28.516Z",
 	"totalFail": 0,
 	"results": [
 		{
 			"id": "87293697-18ac-41b5-9312-6ec4fd6356b0",
 			"name": "Login",
 			"url": "http://localhost:3000/users/login",
-			"time": 5,
+			"time": 21,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -24,7 +24,7 @@
 			"tests": {},
 			"testPassFailCounts": {},
 			"times": [
-				5
+				21
 			],
 			"allTests": [
 				{}
@@ -34,7 +34,7 @@
 			"id": "8dd7e6eb-8d9a-429d-bb8f-d9b1b1c6a5f8",
 			"name": "Crear Recurso",
 			"url": "http://localhost:3000/recursos",
-			"time": 21,
+			"time": 23,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -49,7 +49,7 @@
 				}
 			},
 			"times": [
-				21
+				23
 			],
 			"allTests": [
 				{
@@ -61,7 +61,7 @@
 			"id": "8de92c12-2a00-47bc-88dd-7886b5eb4f8b",
 			"name": "Crear Prestamo Valido",
 			"url": "http://localhost:3000/prestamo",
-			"time": 8,
+			"time": 5,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -76,7 +76,7 @@
 				}
 			},
 			"times": [
-				8
+				5
 			],
 			"allTests": [
 				{
@@ -88,7 +88,7 @@
 			"id": "90bd8714-82ba-49a2-b6af-bf4d1586f85e",
 			"name": "Crear Segundo Prestamo Valido",
 			"url": "http://localhost:3000/prestamo",
-			"time": 6,
+			"time": 4,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -103,7 +103,7 @@
 				}
 			},
 			"times": [
-				6
+				4
 			],
 			"allTests": [
 				{
@@ -115,7 +115,7 @@
 			"id": "8bbb9273-b280-44b1-99ef-961bac383324",
 			"name": "Crear Prestamo Monto muy alto",
 			"url": "http://localhost:3000/prestamo",
-			"time": 6,
+			"time": 5,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -130,7 +130,7 @@
 				}
 			},
 			"times": [
-				6
+				5
 			],
 			"allTests": [
 				{
@@ -141,8 +141,8 @@
 		{
 			"id": "b267a88e-1e74-4e83-8930-0a42a503f7c2",
 			"name": "addRecursoPrestamo Exitoso",
-			"url": "http://localhost:3000/recursos/2/prestamos/1",
-			"time": 14,
+			"url": "http://localhost:3000/recursos/6/prestamos/1",
+			"time": 16,
 			"responseCode": {
 				"code": 201,
 				"name": "Created"
@@ -157,7 +157,7 @@
 				}
 			},
 			"times": [
-				14
+				16
 			],
 			"allTests": [
 				{
@@ -168,8 +168,8 @@
 		{
 			"id": "7d0ba76b-9d7c-4cf2-9691-c7d924a5dc9a",
 			"name": "addRecursoPrestamo Monto excede el valor",
-			"url": "http://localhost:3000/recursos/2/prestamos/3",
-			"time": 5,
+			"url": "http://localhost:3000/recursos/6/prestamos/3",
+			"time": 7,
 			"responseCode": {
 				"code": 412,
 				"name": "Precondition Failed"
@@ -189,7 +189,7 @@
 				}
 			},
 			"times": [
-				5
+				7
 			],
 			"allTests": [
 				{
@@ -202,7 +202,7 @@
 			"id": "0dc4e536-a88f-4ba2-baef-229871ad4ae9",
 			"name": "addRecurso Prestamos Recurso no existe",
 			"url": "http://localhost:3000/recursos/666/prestamos/1",
-			"time": 4,
+			"time": 5,
 			"responseCode": {
 				"code": 404,
 				"name": "Not Found"
@@ -222,7 +222,7 @@
 				}
 			},
 			"times": [
-				4
+				5
 			],
 			"allTests": [
 				{
@@ -234,8 +234,8 @@
 		{
 			"id": "2c6c0b25-4aea-41d0-84e4-f0ccb32dfeed",
 			"name": "addRecursoPrestamo Prestamo no existe",
-			"url": "http://localhost:3000/recursos/2/prestamos/666",
-			"time": 4,
+			"url": "http://localhost:3000/recursos/6/prestamos/666",
+			"time": 5,
 			"responseCode": {
 				"code": 404,
 				"name": "Not Found"
@@ -255,7 +255,7 @@
 				}
 			},
 			"times": [
-				4
+				5
 			],
 			"allTests": [
 				{
@@ -267,7 +267,7 @@
 		{
 			"id": "8f60a9df-8897-4237-a630-1d062bd9a974",
 			"name": "Busqueda exitosa",
-			"url": "http://localhost:3000/recursos/2/prestamos/1",
+			"url": "http://localhost:3000/recursos/6/prestamos/1",
 			"time": 6,
 			"responseCode": {
 				"code": 200,
@@ -295,7 +295,7 @@
 			"id": "1c499087-bc11-495c-962a-dd90ba1dc9d6",
 			"name": "Recurso no se encuentra",
 			"url": "http://localhost:3000/recursos/666/prestamos/1",
-			"time": 4,
+			"time": 5,
 			"responseCode": {
 				"code": 404,
 				"name": "Not Found"
@@ -315,7 +315,7 @@
 				}
 			},
 			"times": [
-				4
+				5
 			],
 			"allTests": [
 				{
@@ -327,7 +327,7 @@
 		{
 			"id": "13499976-383a-4e38-9eb4-0279fe729cfb",
 			"name": "Prestamo no se encuentra",
-			"url": "http://localhost:3000/recursos/2/prestamos/666",
+			"url": "http://localhost:3000/recursos/6/prestamos/666",
 			"time": 4,
 			"responseCode": {
 				"code": 404,
@@ -360,7 +360,7 @@
 		{
 			"id": "6ba8003e-b833-4db0-8466-f2776143f409",
 			"name": "Prestamos no asociado al Recurso",
-			"url": "http://localhost:3000/recursos/2/prestamos/3",
+			"url": "http://localhost:3000/recursos/6/prestamos/3",
 			"time": 7,
 			"responseCode": {
 				"code": 412,
@@ -393,8 +393,8 @@
 		{
 			"id": "074a0166-d064-4389-ba0d-571871f1f0c8",
 			"name": "Busqueda exitosa",
-			"url": "http://localhost:3000/recursos/2/prestamos",
-			"time": 7,
+			"url": "http://localhost:3000/recursos/6/prestamos",
+			"time": 6,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -409,7 +409,7 @@
 				}
 			},
 			"times": [
-				7
+				6
 			],
 			"allTests": [
 				{
@@ -453,8 +453,8 @@
 		{
 			"id": "cf713afa-2cf8-4f1d-9efb-55779b23a481",
 			"name": "Asociacion exitosa",
-			"url": "http://localhost:3000/recursos/2/prestamos",
-			"time": 10,
+			"url": "http://localhost:3000/recursos/6/prestamos",
+			"time": 13,
 			"responseCode": {
 				"code": 200,
 				"name": "OK"
@@ -469,7 +469,7 @@
 				}
 			},
 			"times": [
-				10
+				13
 			],
 			"allTests": [
 				{
@@ -481,7 +481,7 @@
 			"id": "eebc5836-29d6-4b1d-b9ba-56e13761e08b",
 			"name": "El recurso no existe",
 			"url": "http://localhost:3000/recursos/666/prestamos",
-			"time": 3,
+			"time": 4,
 			"responseCode": {
 				"code": 404,
 				"name": "Not Found"
@@ -501,7 +501,7 @@
 				}
 			},
 			"times": [
-				3
+				4
 			],
 			"allTests": [
 				{
@@ -513,7 +513,7 @@
 		{
 			"id": "be48ae00-ab6d-436c-be40-26c10f074204",
 			"name": "Alguno de los prestamos no existe",
-			"url": "http://localhost:3000/recursos/2/prestamos",
+			"url": "http://localhost:3000/recursos/6/prestamos",
 			"time": 7,
 			"responseCode": {
 				"code": 404,
@@ -546,8 +546,8 @@
 		{
 			"id": "d8d39345-db8e-4e96-9b12-eda853d0f0cd",
 			"name": "La suma de los montos supera el valor",
-			"url": "http://localhost:3000/recursos/2/prestamos",
-			"time": 7,
+			"url": "http://localhost:3000/recursos/6/prestamos",
+			"time": 9,
 			"responseCode": {
 				"code": 412,
 				"name": "Precondition Failed"
@@ -567,7 +567,7 @@
 				}
 			},
 			"times": [
-				7
+				9
 			],
 			"allTests": [
 				{
@@ -579,8 +579,8 @@
 		{
 			"id": "6ceddfe4-750b-4753-b235-17d86706802d",
 			"name": "Borrado exitoso del prestamo",
-			"url": "http://localhost:3000/recursos/2/prestamos/1",
-			"time": 8,
+			"url": "http://localhost:3000/recursos/6/prestamos/1",
+			"time": 9,
 			"responseCode": {
 				"code": 204,
 				"name": "No Content"
@@ -595,7 +595,7 @@
 				}
 			},
 			"times": [
-				8
+				9
 			],
 			"allTests": [
 				{
@@ -606,7 +606,7 @@
 		{
 			"id": "eb044c35-f3a4-485a-b3d7-951d0c7a2b07",
 			"name": "El recurso no existe",
-			"url": "http://localhost:3000/recursos/666/prestamos/2",
+			"url": "http://localhost:3000/recursos/666/prestamos/6",
 			"time": 5,
 			"responseCode": {
 				"code": 404,
@@ -639,7 +639,7 @@
 		{
 			"id": "48c23031-aea7-47a9-ba68-a45d8aad2761",
 			"name": "El prestamo no existe",
-			"url": "http://localhost:3000/recursos/2/prestamos/666",
+			"url": "http://localhost:3000/recursos/6/prestamos/666",
 			"time": 3,
 			"responseCode": {
 				"code": 404,
@@ -672,8 +672,8 @@
 		{
 			"id": "9f5e27b0-157e-4a0d-941a-bcf0abc7b767",
 			"name": "El prestamo no esta asociado al recurso",
-			"url": "http://localhost:3000/recursos/2/prestamos/3",
-			"time": 6,
+			"url": "http://localhost:3000/recursos/6/prestamos/3",
+			"time": 7,
 			"responseCode": {
 				"code": 412,
 				"name": "Precondition Failed"
@@ -693,7 +693,7 @@
 				}
 			},
 			"times": [
-				6
+				7
 			],
 			"allTests": [
 				{
@@ -705,7 +705,7 @@
 		{
 			"id": "afe306a4-11cc-4b11-b09e-061ff4233f70",
 			"name": "El prestamo no ha sido pagado",
-			"url": "http://localhost:3000/recursos/2/prestamos/2",
+			"url": "http://localhost:3000/recursos/6/prestamos/2",
 			"time": 6,
 			"responseCode": {
 				"code": 412,
@@ -737,7 +737,7 @@
 		}
 	],
 	"count": 1,
-	"totalTime": 160,
+	"totalTime": 186,
 	"collection": {
 		"requests": [
 			{
