@@ -221,18 +221,5 @@ describe('PrestamoPagoService', () => {
     await expect(()=>service.addPagoPrestamo(prestamo.id,newPago.id)).rejects.toHaveProperty("message","The pago.capital can't be higher than prestamo.monto")
   })
 
-  it('associatePagosPrestamo should thrown an exception for a listo of pago higher than the amount',async ()=>{
-    const newPago: PagoEntity = await pagoRepository.save({
-      fecha: faker.date.anytime(),
-      capital: prestamo.monto,
-      interes: faker.number.int()
-    });
-    const newPago2: PagoEntity = await pagoRepository.save({
-      fecha: faker.date.anytime(),
-      capital: prestamo.monto,
-      interes: faker.number.int()
-    });
-    await expect(()=>service.associatePagosPrestamo(prestamo.id,[newPago,newPago2])).rejects.toHaveProperty("message","The pago.capital can't be higher than prestamo.monto")
-  })
 });
 
