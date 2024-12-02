@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "be59b04b-b735-4e8c-a52c-f171fd2a1c60",
+		"_postman_id": "fd6382e3-29f2-4608-a3ab-13754068bcbd",
 		"name": "Recurso",
 		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -14,8 +14,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"recurso_id\", data.id);",
 							"",
-							""
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(201);",
+							"});"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -37,7 +41,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"casa\",\n    \"tipo\": \"inmueble\",\n    \"descripcion\": \"Casa acogedora de diseño moderno, con amplios espacios, iluminación natural y detalles que combinan confort y elegancia\",\n    \"foto\": \"https://source.unsplash.com/random/800x600\"\n}",
+					"raw": "{\n\t\"nombre\": \"Cuenta Nequi\",\n    \"tipo\": \"Dinero\",\n    \"descripcion\": \"Monto de dinero que tiene disponible el prestamista en Nequi\",\n    \"valor\": 10\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -80,8 +84,7 @@
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
+					"code": 201,
 					"_postman_previewlanguage": "json",
 					"header": [
 						{
@@ -92,7 +95,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "    {\n        \"id\":1,\n        \"nombre\": \"casa\",\n        \"tipo\": \"inmueble\",\n        \"descripcion\": \"Casa acogedora de diseño moderno, con amplios espacios, iluminación natural y detalles que combinan confort y elegancia\",\n        \"foto\": \"https://source.unsplash.com/random/800x600\"\n    }\n   "
+					"body": "{\n    \"id\": 1,\n\t\"nombre\": \"Cuenta Nequi\",\n    \"tipo\": \"Dinero\",\n    \"descripcion\": \"Monto de dinero que tiene disponible el prestamista en Nequi\",\n    \"valor\": 10\n}\n   "
 				}
 			]
 		},
@@ -103,8 +106,8 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful PUT request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
 							"});",
 							""
 						],
@@ -118,7 +121,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"casa\",\n    \"tipo\": \"inmueble\",\n    \"descripcion\": \"Casa acogedora de diseño moderno, con amplios espacios, iluminación natural y detalles que combinan confort y elegancia\",\n    \"foto\": \"https://source.unsplash.com/random/800x600\"\n}",
+					"raw": "{\n\t\"nombre\": \"Cuenta Nequi\",\n    \"tipo\": \"Dinero\",\n    \"descripcion\": \"Monto de dinero que tiene disponible el prestamista en Nequi\",\n    \"valor\": 10\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -176,7 +179,7 @@
 						}
 					],
 					"cookie": [],
-					"body": "{\n    \"id\": 1,\n    \"nombre\": \"casa\",\n    \"tipo\": \"inmueble\",\n    \"descripcion\": \"Casa acogedora de diseño moderno, con amplios espacios, iluminación natural y detalles que combinan confort y elegancia\",\n    \"foto\": \"https://source.unsplash.com/random/800x600\"\n}"
+					"body": "{\n    \"id\": 1,\n    \"nombre\": \"casa\",\n    \"tipo\": \"inmueble\",\n    \"descripcion\": \"Casa acogedora de diseño moderno, con amplios espacios, iluminación natural y detalles que combinan confort y elegancia\",\n    \"valor\": 10,\n}"
 				}
 			]
 		},
@@ -187,10 +190,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Successful PUT request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
 							"});",
-							""
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"No se encontro el recurso con el Id dado\");",
+							"});"
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -202,7 +209,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\": \"casa\",\n    \"tipo\": \"inmueble\",\n    \"descripcion\": \"Casa acogedora de diseño moderno, con amplios espacios, iluminación natural y detalles que combinan confort y elegancia\",\n    \"foto\": \"https://source.unsplash.com/random/800x600\"\n}",
+					"raw": "{\n\t\"nombre\": \"casa\",\n    \"tipo\": \"inmueble\",\n    \"descripcion\": \"Casa acogedora de diseño moderno, con amplios espacios, iluminación natural y detalles que combinan confort y elegancia\",\n    \"valor\": 5123\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -266,6 +273,25 @@
 		},
 		{
 			"name": "Obtener Todos los Recursos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Numero de recursos> ' + 0, function () {",
+							"   var data = pm.response.json()",
+							"   pm.expect(data.length).to.greaterThan(0)",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -314,6 +340,20 @@
 		},
 		{
 			"name": "Obtener un recurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -364,6 +404,25 @@
 		},
 		{
 			"name": "Obtener Recurso que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"No se encontro el recurso con el Id dado\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -412,6 +471,25 @@
 		},
 		{
 			"name": "Eliminar Recurso que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"No se encontro el recurso con el Id dado\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -462,16 +540,31 @@
 		},
 		{
 			"name": "Eliminar Recurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/recursos/{{recurso_id}}",
+					"raw": "{{base_url}}/recursos/recurso/{{recurso_id}}",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"recursos",
+						"recurso",
 						"{{recurso_id}}"
 					]
 				}
@@ -495,10 +588,10 @@
 					},
 					"status": "No Content",
 					"code": 204,
-					"_postman_previewlanguage": null,
-					"header": null,
+					"_postman_previewlanguage": "Text",
+					"header": [],
 					"cookie": [],
-					"body": null
+					"body": ""
 				}
 			]
 		}

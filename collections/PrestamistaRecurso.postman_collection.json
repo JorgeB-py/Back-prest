@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "af595b01-faa2-4636-b5a9-9c97999b45a0",
+		"_postman_id": "f7864d8f-d172-4914-9d0a-899267e15fd1",
 		"name": "PrestamistaRecurso",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "34867910"
+		"_exporter_id": "40028169"
 	},
 	"item": [
 		{
@@ -13,25 +13,27 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var response = pm.response.json();\r",
-							"if (response.token) {\r",
-							"    pm.globals.set(\"access_token\", response.token);\r",
-							"    console.log(\"Token guardado en variable de entorno:\", response.token);\r",
-							"} else {\r",
-							"    console.log(\"No se encontró el token en la respuesta\");\r",
-							"}"
+							"var response = pm.response.json();",
+							"pm.globals.set(\"access_token\", response.token);",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
 						],
-						"type": "text/javascript",
-						"packages": {}
+						"type": "text/javascript"
 					}
 				}
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\":\"admin\",\r\n    \"password\":\"admin\"\r\n}",
+					"raw": "{\n    \"username\": \"admin\",\n    \"admin\": \"admin\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -39,12 +41,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/users/login",
-					"protocol": "http",
+					"raw": "{{baseUrl}}/users/login",
 					"host": [
-						"localhost"
+						"{{baseUrl}}"
 					],
-					"port": "3000",
 					"path": [
 						"users",
 						"login"
@@ -133,7 +133,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\":\"dinero\",\r\n    \"tipo\": \"dinero\",\r\n    \"descripcion\":\"dindero\",\r\n    \"valor\": 1\r\n }",
+					"raw": "{\r\n\t\"nombre\": \"Cuenta Nequi\",\r\n    \"tipo\": \"Dinero\",\r\n    \"descripcion\": \"Monto de dinero que tiene disponible el prestamista en Nequi\",\r\n    \"valor\": 10\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -181,7 +181,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombre\":\"dinero2\",\r\n    \"tipo\": \"dinero\",\r\n    \"descripcion\":\"dindero\",\r\n    \"valor\": 1\r\n }",
+					"raw": "{\r\n\t\"nombre\": \"Cuenta Nequi\",\r\n    \"tipo\": \"Dinero\",\r\n    \"descripcion\": \"Monto de dinero que tiene disponible el prestamista en Nequi\",\r\n    \"valor\": 10\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -254,8 +254,7 @@
 							"    pm.expect(data.message).to.eql(\"The recurso with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -268,7 +267,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/00000000000000000000000000000000",
+					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/00000000-0000-0000-0000-000000000000",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -276,7 +275,7 @@
 						"prestamistas",
 						"{{prestamista_id}}",
 						"recursos",
-						"00000000000000000000000000000000"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},
@@ -298,8 +297,7 @@
 							"    pm.expect(data.message).to.eql(\"The prestamista with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -312,13 +310,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/00000000000000000000000000000000/recursos/{{recurso_id}}",
+					"raw": "{{baseUrl}}/prestamistas/00000000-0000-0000-0000-000000000000/recursos/{{recurso_id}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"prestamistas",
-						"00000000000000000000000000000000",
+						"00000000-0000-0000-0000-000000000000",
 						"recursos",
 						"{{recurso_id}}"
 					]
@@ -380,8 +378,7 @@
 							"    pm.expect(data.message).to.eql(\"The recurso with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -394,7 +391,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/00000000000000000000000000000000",
+					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/00000000-0000-0000-0000-000000000000",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -402,7 +399,7 @@
 						"prestamistas",
 						"{{prestamista_id}}",
 						"recursos",
-						"00000000000000000000000000000000"
+						"00000000-0000-0000-0000-000000000000"
 					]
 				}
 			},
@@ -424,8 +421,7 @@
 							"    pm.expect(data.message).to.eql(\"The prestamista with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -438,13 +434,56 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/00000000000000000000000000000000/recursos/{{recurso_id}}",
+					"raw": "{{baseUrl}}/prestamistas/00000000-0000-0000-0000-000000000000/recursos/{{recurso_id}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"prestamistas",
-						"00000000000000000000000000000000",
+						"00000000-0000-0000-0000-000000000000",
+						"recursos",
+						"{{recurso_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a recurso non-associated to a prestamista",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {",
+							"    pm.response.to.have.status(412);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The recurso with the given id is not associated to the prestamista\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/{{recurso_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"prestamistas",
+						"{{prestamista_id}}",
 						"recursos",
 						"{{recurso_id}}"
 					]
@@ -506,8 +545,7 @@
 							"    pm.expect(data.message).to.eql(\"The prestamista with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -520,13 +558,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/00000000000000000000000000000000/recursos/",
+					"raw": "{{baseUrl}}/prestamistas/00000000-0000-0000-0000-000000000000/recursos/",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"prestamistas",
-						"00000000000000000000000000000000",
+						"00000000-0000-0000-0000-000000000000",
 						"recursos",
 						""
 					]
@@ -545,6 +583,58 @@
 							"    pm.response.to.have.status(200);",
 							"});"
 						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n\t\"nombre\": \"Cuenta Nequi\",\n    \"tipo\": \"Dinero\",\n    \"descripcion\": \"Monto de dinero que tiene disponible el prestamista en Nequi\",\n    \"valor\": 10\n}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"prestamistas",
+						"{{prestamista_id}}",
+						"recursos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update invalid recurso of a prestamista",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The recurso with the given id was not found\");",
+							"});"
+						],
 						"type": "text/javascript"
 					}
 				}
@@ -559,7 +649,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "[\n    {\n        \"nombre\": \"lukas\"\n    }\n]",
+					"raw": "[\n    {\n        \"id\": \"00000000-0000-0000-0000-000000000000\"\n    }\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -596,8 +686,7 @@
 							"    pm.expect(data.message).to.eql(\"The prestamista with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -619,13 +708,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/00000000000000000000000000000000/recursos",
+					"raw": "{{baseUrl}}/prestamistas/00000000-0000-0000-0000-000000000000/recursos",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"prestamistas",
-						"00000000000000000000000000000000",
+						"00000000-0000-0000-0000-000000000000",
 						"recursos"
 					]
 				}
@@ -724,8 +813,7 @@
 							"    pm.expect(data.message).to.eql(\"The prestamista with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -738,13 +826,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/00000000000000000000000000000000/recursos/{{recurso_id}}",
+					"raw": "{{baseUrl}}/prestamistas/00000000-0000-0000-0000-000000000000/recursos/{{recurso_id}}",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"prestamistas",
-						"00000000000000000000000000000000",
+						"00000000-0000-0000-0000-000000000000",
 						"recursos",
 						"{{recurso_id}}"
 					]
@@ -768,8 +856,7 @@
 							"    pm.expect(data.message).to.eql(\"The recurso with the given id was not found\");",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -782,7 +869,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/00000000000000000000000000000000",
+					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/00000000-0000-0000-0000-000000000000",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -790,7 +877,50 @@
 						"prestamistas",
 						"{{prestamista_id}}",
 						"recursos",
-						"00000000000000000000000000000000"
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete an recurso non-associated to a prestamista",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {",
+							"    pm.response.to.have.status(412);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"The recurso with the given id is not associated to the prestamista\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/prestamistas/{{prestamista_id}}/recursos/{{recurso_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"prestamistas",
+						"{{prestamista_id}}",
+						"recursos",
+						"{{recurso_id}}"
 					]
 				}
 			},
