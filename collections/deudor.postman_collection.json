@@ -87,7 +87,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombrecompleto\":\"Mariana\",\r\n    \"direccion\":\"La esmeralda\",\r\n    \"telefono\":\"3115322015\",\r\n    \"email\":\"marianamarin@gmail.com\",\r\n    \"ocupacion\":\"estudiante\",\r\n    \"foto\":\"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.dzoom.org.es%2F11-consejos-para-hacer-mejores-fotos-que-siempre-me-funcionan%2F&psig=AOvVaw3sSLz7eBigqa2xj-7adQxE&ust=1732147608494000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKidpenO6YkDFQAAAAAdAAAAABAJ\"\r\n}",
+					"raw": "{\r\n    \"nombrecompleto\":\"Mariana\",\r\n    \"direccion\":\"La esmeralda\",\r\n    \"cedula\":\"106686400\",\r\n    \"fecha\":\"2024-11-3\",\r\n    \"telefono\":\"3115322015\",\r\n    \"situacionLaboral\":\"empleado\",\r\n    \"email\":\"marianamarin@gmail.com\",\r\n    \"ocupacion\":\"estudiante\",\r\n    \"foto\":\"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.dzoom.org.es%2F11-consejos-para-hacer-mejores-fotos-que-siempre-me-funcionan%2F&psig=AOvVaw3sSLz7eBigqa2xj-7adQxE&ust=1732147608494000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKidpenO6YkDFQAAAAAdAAAAABAJ\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -252,7 +252,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombrecompleto\":\"Jorge\",\r\n    \"direccion\":\"Los cocos\",\r\n    \"telefono\":\"3147227637\",\r\n    \"email\":\"jorgebtm26@gmail.com\",\r\n    \"ocupacion\":\"estudiante\",\r\n    \"foto\":\"https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg\"\r\n}",
+					"raw": "{\r\n    \"nombrecompleto\":\"Jorge\",\r\n    \"direccion\":\"Los cocos\",\r\n    \"fecha\":\"2024-02-02\",\r\n    \"cedula\":\"44121212\",\r\n    \"telefono\":\"3147227637\",\r\n    \"email\":\"jorgebtm26@gmail.com\",\r\n    \"ocupacion\":\"estudiante\",\r\n    \"foto\":\"https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -300,7 +300,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombrecompleto\":\"Jorge\",\r\n    \"direccion\":\"Los cocos\",\r\n    \"telefono\":\"3147227637\",\r\n    \"email\":\"jorgebtm26@gmail.com\",\r\n    \"ocupacion\":\"estudiante\",\r\n    \"foto\":\"https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg\"\r\n}",
+					"raw": "{\r\n    \"nombrecompleto\":\"Jorge\",\r\n    \"direccion\":\"Los cocos\",\r\n    \"telefono\":\"3147227637\",\r\n    \"cedula\":\"52222222\",\r\n    \"fecha\":\"2022-10-01\",\r\n    \"email\":\"jorgebtm26@gmail.com\",\r\n    \"ocupacion\":\"estudiante\",\r\n    \"foto\":\"https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
