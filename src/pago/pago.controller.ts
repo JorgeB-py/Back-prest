@@ -29,7 +29,7 @@ export class PagoController {
     }
     
     @UseGuards(JwtAuthGuard)
-    @Roles(Role.ADMIN,Role.DEUDOR)
+    @Roles(Role.ADMIN, Role.PRESTAMISTA, Role.DEUDOR)
     @Post()
     async create(@Body() pagoDto: PagoDto) {
         const pago: PagoEntity = plainToInstance(PagoEntity, pagoDto);
