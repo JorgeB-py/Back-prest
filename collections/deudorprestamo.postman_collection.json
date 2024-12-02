@@ -87,7 +87,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nombrecompleto\":\"Mariana\",\r\n    \"direccion\":\"La esmeralda\",\r\n    \"telefono\":\"3115322015\",\r\n    \"email\":\"marianamarin@gmail.com\",\r\n    \"ocupacion\":\"estudiante\",\r\n    \"foto\":\"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.dzoom.org.es%2F11-consejos-para-hacer-mejores-fotos-que-siempre-me-funcionan%2F&psig=AOvVaw3sSLz7eBigqa2xj-7adQxE&ust=1732147608494000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKidpenO6YkDFQAAAAAdAAAAABAJ\"\r\n}",
+					"raw": "{\r\n    \"nombrecompleto\":\"Mariana\",\r\n    \"cedula\":\"5151541541\",\r\n    \"situacionLaboral\":\"empleado\",\r\n    \"direccion\":\"La esmeralda\",\r\n    \"fecha\":\"2024-01-01\",\r\n    \"telefono\":\"3115322015\",\r\n    \"email\":\"marianamarin@gmail.com\",\r\n    \"ocupacion\":\"estudiante\",\r\n    \"foto\":\"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.dzoom.org.es%2F11-consejos-para-hacer-mejores-fotos-que-siempre-me-funcionan%2F&psig=AOvVaw3sSLz7eBigqa2xj-7adQxE&ust=1732147608494000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKidpenO6YkDFQAAAAAdAAAAABAJ\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -132,7 +132,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"monto\":2000,\r\n    \"interes\":5,\r\n    \"fechainicio\":\"2024/05/01\",\r\n    \"fechafin\":\"2024/06/01\",\r\n    \"pagado\":true,\r\n    \"deudorId\":\"1\"\r\n}",
+					"raw": "{\r\n    \"nombre\":\"estudios\",\r\n    \"monto\":2000,\r\n    \"interes\":5,\r\n    \"fechainicio\":\"2024-05-01\",\r\n    \"fechafin\":\"2024-06-01\",\r\n    \"pagado\":false\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -323,7 +323,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"monto\":3000,\r\n    \"interes\":5,\r\n    \"fechainicio\":\"2024/05/01\",\r\n    \"fechafin\":\"2024/06/01\",\r\n    \"pagado\":true,\r\n    \"deudorId\":\"1\"\r\n}",
+					"raw": "{\r\n    \"monto\":3000,\r\n    \"interes\":5,\r\n    \"fechainicio\":\"2024/05/01\",\r\n    \"nombre\":\"prueba\",\r\n    \"fechafin\":\"2024/06/01\",\r\n    \"pagado\":true,\r\n    \"deudorId\":\"1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -447,7 +447,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "[{\r\n \"id\":\"2\",\r\n \"monto\":3000, \r\n \"interes\":5.0, \r\n \"fechainicio\":\"2024-05-01\", \r\n \"fechafin\":\"2025-06-15\", \r\n \"pagado\":true, \r\n \"deudorId\":\"1\"\r\n}]",
+					"raw": "[{\r\n \"id\":\"2\",\r\n \"monto\":3000, \r\n \"interes\":5.0,\r\n \"nombre\":\"prueba\",\r\n \"fechainicio\":\"2024-05-01\", \r\n \"fechafin\":\"2025-06-15\", \r\n \"pagado\":true, \r\n \"deudorId\":\"1\"\r\n}]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -491,7 +491,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n \"id\":\"1\",\r\n \"monto\":50000, \r\n \"interes\":5.0, \r\n \"fechainicio\":\"2024-05-01\", \r\n \"fechafin\":\"2025-06-15\", \r\n \"pagado\":true, \r\n \"deudorId\":\"1\"\r\n}",
+					"raw": "{\r\n \"id\":\"1\",\r\n \"monto\":50000, \r\n \"interes\":5.0, \r\n \"nombre\":\"prueba\",\r\n \"fechainicio\":\"2024-05-01\", \r\n \"fechafin\":\"2025-06-15\", \r\n \"pagado\":true, \r\n \"deudorId\":\"1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -640,7 +640,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n \"id\":\"1\",\r\n \"monto\":50000, \r\n \"interes\":5.0, \r\n \"fechainicio\":\"2024-05-01\", \r\n \"fechafin\":\"2025-06-15\", \r\n \"pagado\":true, \r\n \"deudorId\":\"1\"\r\n}",
+					"raw": "{\r\n \"id\":\"1\",\r\n \"monto\":50000, \r\n \"interes\":5.0, \r\n \"nombre\":\"prueba\",\r\n \"fechainicio\":\"2024-05-01\", \r\n \"fechafin\":\"2025-06-15\", \r\n \"pagado\":true, \r\n \"deudorId\":\"1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
