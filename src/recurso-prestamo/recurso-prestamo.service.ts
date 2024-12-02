@@ -29,7 +29,7 @@ export class RecursoPrestamoService
         // Se verifica que el recurso exista.
         if (!recurso)
           throw new BusinessLogicException("No se encontro el recurso con el Id dado", BusinessError.NOT_FOUND);
-        
+
         // Variable para registrar cuanto de un recurso esta actualmente prestado.
         let prestado = 0;
         // Se calcula cuanto de un recurso esta actualmente prestado sumando todos los valores de los prestamos asociados al recurso.
