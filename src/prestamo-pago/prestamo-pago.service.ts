@@ -25,11 +25,17 @@ export class PrestamoPagoService {
     const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({ where: { id: prestamoId }, relations: ["historialpagos"] })
     if (!prestamo)
       throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND);
+    var totalPagosCapital = pago.capital;
 
+    for(let i = 0; i < prestamo.historialpagos.length; i++) {
+      totalPagosCapital=prestamo.historialpagos[i].capital+totalPagosCapital;
+    }
+    if (prestamo.monto < totalPagosCapital) {
+      throw new BusinessLogicException("The pago.capital can't be higher than prestamo.monto", BusinessError.NOT_FOUND);
+    }
     if (prestamo.monto < pago.capital) {
       throw new BusinessLogicException("The pago.capital can't be higher than prestamo.monto", BusinessError.NOT_FOUND);
     }
-    prestamo.monto -= pago.capital
     prestamo.historialpagos = [...prestamo.historialpagos, pago];
     return await this.prestamoRepository.save(prestamo);
   }
@@ -65,22 +71,18 @@ export class PrestamoPagoService {
     if (!prestamo)
       throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND)
 
-    // Le sumamos los pagos a reemplazar, a la deuda
-    let totalPagosCapital = 0;
-    prestamo.historialpagos.forEach(element => {
-      totalPagosCapital += element.capital
-    });
-    prestamo.monto += totalPagosCapital;
-
     for (let i = 0; i < pagos.length; i++) {
       const pago: PagoEntity = await this.pagoRepository.findOne({ where: { id: pagos[i].id } });
       if (!pago) {
         throw new BusinessLogicException("The pago with the given id was not found", BusinessError.NOT_FOUND)
       }
-      if (prestamo.monto < pago.capital) {
+      var totalPagosCapital = 0;
+      for(i = 0; i < pagos.length; i++) {
+        totalPagosCapital=prestamo.historialpagos[i].capital+totalPagosCapital;
+      }
+      if (prestamo.monto < totalPagosCapital) {
         throw new BusinessLogicException("The pago.capital can't be higher than prestamo.monto", BusinessError.NOT_FOUND);
       }
-      prestamo.monto -= pago.capital // Le restamos los pagos actualizados
     }
     prestamo.historialpagos = pagos;
     return await this.prestamoRepository.save(prestamo);
