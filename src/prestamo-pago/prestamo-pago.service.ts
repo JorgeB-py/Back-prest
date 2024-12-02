@@ -56,18 +56,15 @@ export class PrestamoPagoService {
       }
 
       async associatePagosPrestamo(prestamoId: string, pagos: PagoEntity[]): Promise<PrestamoEntity> {
+        console.log(prestamoId);
+        console.log(pagos);
         const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({where: {id: prestamoId}, relations: ["historialpagos"]});
     
         if (!prestamo)
           throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND)
     
-        for (let i = 0; i < pagos.length; i++) {
-          const pago: PagoEntity = await this.pagoRepository.findOne({where: {id: pagos[i].id}});
-          if (!pago)
-            throw new BusinessLogicException("The pago with the given id was not found", BusinessError.NOT_FOUND)
-        }
-    
         prestamo.historialpagos = pagos;
+        console.log(prestamo);
         return await this.prestamoRepository.save(prestamo);
       }
 
