@@ -29,7 +29,6 @@ import {Body,Controller,Delete,Get,HttpCode,Param,Post,Put,UseInterceptors, UseG
   
     @Post()
     @UseGuards(JwtAuthGuard)
-    @Roles(Role.ADMIN)
     async create(@Body() prestamistaDto: PrestamistaDto) {
       const prestamista: PrestamistaEntity = plainToInstance(
         PrestamistaEntity,

@@ -32,7 +32,7 @@ import { RecursoPrestamoModule } from './recurso-prestamo/recurso-prestamo.modul
       password: 'postgres',
       database: 'Prest',
       entities: [PrestamoEntity, DeudorEntity, PrestamistaEntity, RecursoEntity, PagoEntity],
-      dropSchema: false,
+      dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true,
     }),

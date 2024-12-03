@@ -27,7 +27,7 @@ export class PrestamoEntity {
   @Column()
   pagado: boolean;
 
-  @ManyToOne(() => DeudorEntity, deudor => deudor.id)
+  @ManyToOne(() => DeudorEntity, deudor => deudor.id, { onDelete: 'CASCADE' })
     deudor: DeudorEntity;
 
   @ManyToOne(() => PrestamistaEntity, prestamista => prestamista.id)

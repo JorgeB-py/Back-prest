@@ -4,10 +4,12 @@ import { DeudorEntity } from './deudor.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BusinessLogicException, BusinessError } from '../shared/errors/business-errors';
+import { PrestamoEntity } from '../prestamo/prestamo.entity';
 
 describe('DeudorService', () => {
   let service: DeudorService;
   let repository: Repository<DeudorEntity>;
+  let repositoryPrestamo: Repository<PrestamoEntity>;
 
   const mockDeudorArray = [
     {
@@ -33,7 +35,7 @@ describe('DeudorService', () => {
       prestamos: [],
     },
   ] as DeudorEntity[];
-  
+
   const mockDeudor = {
     id: '3',
     nombrecompleto: 'New Deudor',
@@ -53,6 +55,14 @@ describe('DeudorService', () => {
     remove: jest.fn().mockResolvedValue(null),
   };
 
+  // Mock para el repositorio de PrestamoEntity
+  const mockPrestamoRepository = {
+    find: jest.fn(),
+    findOne: jest.fn(),
+    save: jest.fn(),
+    remove: jest.fn(),
+  };
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -61,11 +71,16 @@ describe('DeudorService', () => {
           provide: getRepositoryToken(DeudorEntity),
           useValue: mockRepository,
         },
+        {
+          provide: getRepositoryToken(PrestamoEntity),
+          useValue: mockPrestamoRepository,
+        },
       ],
     }).compile();
 
     service = module.get<DeudorService>(DeudorService);
     repository = module.get<Repository<DeudorEntity>>(getRepositoryToken(DeudorEntity));
+    repositoryPrestamo = module.get<Repository<PrestamoEntity>>(getRepositoryToken(PrestamoEntity));
   });
 
   it('should be defined', () => {
@@ -96,8 +111,7 @@ describe('DeudorService', () => {
         expect(error).toBeInstanceOf(BusinessLogicException);
         expect(error.message).toBe("The deudor with the given id was not found");
       }
-  });
-  
+    });
   });
 
   describe('create', () => {

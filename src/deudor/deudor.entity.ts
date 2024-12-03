@@ -32,6 +32,6 @@ export class DeudorEntity {
 
   @Column()
   foto: string;
-  @OneToMany(() => PrestamoEntity, prestamos => prestamos.deudor)
+  @OneToMany(() => PrestamoEntity, prestamos => prestamos.deudor, {cascade: true})
     prestamos: PrestamoEntity[];
 }

@@ -3,6 +3,7 @@ import { DeudorEntity } from './deudor.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
+import { PrestamoEntity } from '../prestamo/prestamo.entity';
 
 
 
@@ -10,7 +11,9 @@ import { BusinessError, BusinessLogicException } from '../shared/errors/business
 export class DeudorService {
   constructor(
     @InjectRepository(DeudorEntity)
-    private readonly deudorRepository: Repository<DeudorEntity>
+    private readonly deudorRepository: Repository<DeudorEntity>,
+    @InjectRepository(PrestamoEntity)
+    private readonly prestamoRepository: Repository<PrestamoEntity>
   ) { }
   async findAll(): Promise<DeudorEntity[]> {
     return await this.deudorRepository.find({ relations: ["prestamos"] });
@@ -44,9 +47,11 @@ export class DeudorService {
     return await this.deudorRepository.save({ ...persistedDeudor, ...deudor });
   }
   async delete(id: string) {
-    const deudor: DeudorEntity = await this.deudorRepository.findOne({ where: { id } });
+    const deudor: DeudorEntity = await this.deudorRepository.findOne({ where: { id }, relations: ["prestamos"] });
     if (!deudor)
       throw new BusinessLogicException("The deudor with the given id was not found", BusinessError.NOT_FOUND);
+
+    await this.prestamoRepository.remove(deudor.prestamos);
 
     await this.deudorRepository.remove(deudor);
   }
