@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "604b9854-f8fe-4338-9df6-d8700c4b795f",
+		"_postman_id": "a6fe727c-48cd-4d61-a556-9df2ba2092a6",
 		"name": "PagoPrestamo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "40124253"
+		"_exporter_id": "29349654",
+		"_collection_link": "https://crimson-meteor-333919.postman.co/workspace/Como-monitor~ae7732a6-ab7a-45af-923b-8b9d7e2538cb/collection/29349654-a6fe727c-48cd-4d61-a556-9df2ba2092a6?action=share&source=collection_link&creator=29349654"
 	},
 	"item": [
 		{
@@ -315,6 +316,11 @@
 							"const expectedCode = 404;\r",
 							"pm.test(`Status code is ${expectedCode}`, function () {\r",
 							"    pm.response.to.have.status(expectedCode);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The pago with the given id was not found\");\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -382,6 +388,11 @@
 							"const expectedCode = 404;\r",
 							"pm.test(`Status code is ${expectedCode}`, function () {\r",
 							"    pm.response.to.have.status(expectedCode);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The prestamo with the given id was not found\");\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -525,6 +536,11 @@
 							"const expectedCode = 404;",
 							"pm.test(`Status code is ${expectedCode}`, function () {",
 							"    pm.response.to.have.status(expectedCode);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"The pago with the given id was not found\");",
 							"});"
 						],
 						"type": "text/javascript",
@@ -601,6 +617,11 @@
 							"const expectedCode = 404;",
 							"pm.test(`Status code is ${expectedCode}`, function () {",
 							"    pm.response.to.have.status(expectedCode);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"The prestamo with the given id was not found\");",
 							"});"
 						],
 						"type": "text/javascript",
@@ -677,6 +698,11 @@
 							"const expectedCode = 412;",
 							"pm.test(`Status code is ${expectedCode}`, function () {",
 							"    pm.response.to.have.status(expectedCode);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"The pago with the given id is not associated to the prestamo\");",
 							"});"
 						],
 						"type": "text/javascript",
@@ -839,6 +865,11 @@
 							"const expectedCode = 404;",
 							"pm.test(`Status code is ${expectedCode}`, function () {",
 							"    pm.response.to.have.status(expectedCode);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"The prestamo with the given id was not found\");",
 							"});"
 						],
 						"type": "text/javascript",
@@ -990,6 +1021,11 @@
 							"const expectedCode = 404;\r",
 							"pm.test(`Status code is ${expectedCode}`, function () {\r",
 							"    pm.response.to.have.status(expectedCode);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The pago with the given id was not found\");\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -1067,6 +1103,11 @@
 							"const expectedCode = 404;\r",
 							"pm.test(`Status code is ${expectedCode}`, function () {\r",
 							"    pm.response.to.have.status(expectedCode);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The prestamo with the given id was not found\");\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -1220,6 +1261,11 @@
 							"const expectedCode = 404;\r",
 							"pm.test(`Status code is ${expectedCode}`, function () {\r",
 							"    pm.response.to.have.status(expectedCode);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The pago with the given id was not found\");\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -1287,6 +1333,11 @@
 							"const expectedCode = 404;\r",
 							"pm.test(`Status code is ${expectedCode}`, function () {\r",
 							"    pm.response.to.have.status(expectedCode);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The prestamo with the given id was not found\");\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -1363,6 +1414,11 @@
 							"const expectedCode = 412;\r",
 							"pm.test(`Status code is ${expectedCode}`, function () {\r",
 							"    pm.response.to.have.status(expectedCode);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The pago with the given id is not associated to the prestamo\");\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -1438,7 +1494,7 @@
 				"type": "text/javascript",
 				"packages": {},
 				"exec": [
-					""
+					"pm.globals.set(\"baseUrl\", \"http://localhost:3000\");"
 				]
 			}
 		},
