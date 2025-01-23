@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import {DeudorModule } from './deudor/deudor.module';
 import { DeudorEntity } from './deudor/deudor.entity';
 import {PrestamoModule } from './prestamo/prestamo.module';
@@ -21,6 +20,8 @@ import { PagoModule } from './pago/pago.module';
 import { PagoEntity } from './pago/pago.entity';
 import { PrestamoPagoModule } from './prestamo-pago/prestamo-pago.module';
 import { RecursoPrestamoModule } from './recurso-prestamo/recurso-prestamo.module';
+import { AppService } from './app.service';
+import { UserEntity } from './user/user.entity';
 
 @Module({
   imports: [DeudorModule, PrestamoModule,
@@ -31,7 +32,7 @@ import { RecursoPrestamoModule } from './recurso-prestamo/recurso-prestamo.modul
       username: 'postgres',   
       password: 'postgres',
       database: 'Prest',
-      entities: [PrestamoEntity, DeudorEntity, PrestamistaEntity, RecursoEntity, PagoEntity],
+      entities: [PrestamoEntity, DeudorEntity, PrestamistaEntity, RecursoEntity, PagoEntity, UserEntity],
       dropSchema: true,
       synchronize: true,
       keepConnectionAlive: true,
