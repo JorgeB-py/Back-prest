@@ -12,8 +12,7 @@ import { RecursoModule } from './recurso/recurso.module';
 import { RecursoEntity } from './recurso/recurso.entity';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { JwtAuthGuard } from './auth/guards/jwt-auth/jwt-auth.guard';
-import { LocalAuthGuard } from './auth/guards/local-auth/local-auth.guard';
+import { ConfigModule } from '@nestjs/config';
 import { PrestamistaPrestamoModule } from './prestamista-prestamo/prestamista-prestamo.module';
 import { PrestamistaRecursoModule } from './prestamista-recurso/prestamista-recurso.module';
 import { PagoModule } from './pago/pago.module';
@@ -33,7 +32,7 @@ import { UserEntity } from './user/user.entity';
       password: 'postgres',
       database: 'Prest',
       entities: [PrestamoEntity, DeudorEntity, PrestamistaEntity, RecursoEntity, PagoEntity, UserEntity],
-      dropSchema: true,
+      dropSchema: false,
       synchronize: true,
       keepConnectionAlive: true,
     }),
