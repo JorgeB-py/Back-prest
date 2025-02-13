@@ -106,4 +106,23 @@ export class PrestamoPagoService {
     prestamo.historialpagos = prestamo.historialpagos.filter(e => Number(e.id) !== Number(pagoId))
     await this.prestamoRepository.save(prestamo);
   }
+  async updatePagoPrestamo(prestamoId: string, pagoId: string, pagoUpdated: PagoEntity): Promise<PrestamoEntity> {
+    const pago: PagoEntity = await this.pagoRepository.findOne({ where: { id: pagoId } });
+    if (!pago) throw new BusinessLogicException("The pago with the given id was not found", BusinessError.NOT_FOUND);
+  
+    const prestamo: PrestamoEntity = await this.prestamoRepository.findOne({ where: { id: prestamoId }, relations: ["historialpagos"] });
+    if (!prestamo) throw new BusinessLogicException("The prestamo with the given id was not found", BusinessError.NOT_FOUND);
+  
+    // Buscar el pago en el historial de pagos y reemplazarlo con el pago actualizado
+    const index = prestamo.historialpagos.findIndex((p) => p.id === pagoId);
+    if (index === -1) {
+      throw new BusinessLogicException("The pago is not associated with the prestamo", BusinessError.PRECONDITION_FAILED);
+    }
+  
+    // Reemplazar el pago en el historial
+    prestamo.historialpagos[index] = pagoUpdated;
+  
+    return await this.prestamoRepository.save(prestamo);
+  }
+  
 }

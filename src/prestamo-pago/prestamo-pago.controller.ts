@@ -12,42 +12,51 @@ import { Roles } from 'src/user/roles.decorator';
 @Controller('prestamos')
 @UseInterceptors(BusinessErrorsInterceptor)
 export class PrestamoPagoController {
-    constructor(private readonly prestamoPagoService: PrestamoPagoService){}
-    
+    constructor(private readonly prestamoPagoService: PrestamoPagoService) { }
+
     @UseGuards(JwtAuthGuard)
-    @Roles(Role.ADMIN,Role.DEUDOR, Role.PRESTAMISTA)
+    @Roles(Role.ADMIN, Role.DEUDOR, Role.PRESTAMISTA)
     @Post(':prestamoId/pagos/:pagoId')
-    async addPagoPrestamo(@Param('prestamoId') prestamoId: string, @Param('pagoId') pagoId: string){
+    async addPagoPrestamo(@Param('prestamoId') prestamoId: string, @Param('pagoId') pagoId: string) {
         return await this.prestamoPagoService.addPagoPrestamo(prestamoId, pagoId);
     }
 
     @UseGuards(JwtAuthGuard)
-    @Roles(Role.ADMIN,Role.DEUDOR,Role.PRESTAMISTA)
+    @Roles(Role.ADMIN, Role.DEUDOR, Role.PRESTAMISTA)
     @Get(':prestamoId/pagos/:pagoId')
-    async findPagoByPrestamoIdPagoId(@Param('prestamoId') prestamoId: string, @Param('pagoId') pagoId: string){
+    async findPagoByPrestamoIdPagoId(@Param('prestamoId') prestamoId: string, @Param('pagoId') pagoId: string) {
         return await this.prestamoPagoService.findPagoByPrestamoIdPagoId(prestamoId, pagoId);
     }
-    
+
     @UseGuards(JwtAuthGuard)
-    @Roles(Role.ADMIN,Role.PRESTAMISTA,Role.DEUDOR)
+    @Roles(Role.ADMIN, Role.PRESTAMISTA, Role.DEUDOR)
     @Get(':prestamoId/pagos')
-    async findPagosByPrestamoId(@Param('prestamoId') prestamoId: string){
+    async findPagosByPrestamoId(@Param('prestamoId') prestamoId: string) {
         return await this.prestamoPagoService.findPagosByPrestamoId(prestamoId);
     }
 
     @UseGuards(JwtAuthGuard)
-    @Roles(Role.ADMIN,Role.DEUDOR, Role.PRESTAMISTA)
+    @Roles(Role.ADMIN, Role.DEUDOR, Role.PRESTAMISTA)
     @Put(':prestamoId/pagos')
-    async associatePagosPrestamo(@Body() pagosDto: PagoDto[], @Param('prestamoId') prestamoId: string){
+    async associatePagosPrestamo(@Body() pagosDto: PagoDto[], @Param('prestamoId') prestamoId: string) {
         const pagos = plainToInstance(PagoEntity, pagosDto)
         return await this.prestamoPagoService.associatePagosPrestamo(prestamoId, pagos);
     }
-    
+
     @UseGuards(JwtAuthGuard)
     @Roles(Role.ADMIN)
     @Delete(':prestamoId/pagos/:pagoId')
     @HttpCode(204)
-    async deletePagoPrestamo(@Param('prestamoId') prestamoId: string, @Param('pagoId') pagoId: string){
+    async deletePagoPrestamo(@Param('prestamoId') prestamoId: string, @Param('pagoId') pagoId: string) {
         return await this.prestamoPagoService.deletePagoPrestamo(prestamoId, pagoId);
     }
+    @Put(':prestamoId/pagos/:pagoId')
+    async updatePagoPrestamo(
+        @Param('prestamoId') prestamoId: string,
+        @Param('pagoId') pagoId: string,
+        @Body() pagoUpdated: PagoEntity
+    ) {
+        return await this.prestamoPagoService.updatePagoPrestamo(prestamoId, pagoId, pagoUpdated);
+    }
+
 }
