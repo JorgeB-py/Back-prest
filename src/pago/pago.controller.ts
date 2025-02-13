@@ -45,7 +45,7 @@ export class PagoController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Roles(Role.ADMIN)
+    @Roles(Role.ADMIN, Role.PRESTAMISTA, Role.DEUDOR)
     @Delete(':pagoId')
     @HttpCode(204)
     async delete(@Param('pagoId') pagoId: string) {
