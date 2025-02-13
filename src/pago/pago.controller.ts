@@ -37,7 +37,7 @@ export class PagoController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Roles(Role.ADMIN)
+    @Roles(Role.ADMIN, Role.PRESTAMISTA, Role.DEUDOR)
     @Put(':pagoId')
     async update(@Param('pagoId') pagoId: string, @Body() pagoDto: PagoDto) {
       const pago: PagoEntity = plainToInstance(PagoEntity, pagoDto);
