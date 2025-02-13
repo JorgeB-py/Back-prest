@@ -50,6 +50,8 @@ export class PrestamoPagoController {
     async deletePagoPrestamo(@Param('prestamoId') prestamoId: string, @Param('pagoId') pagoId: string) {
         return await this.prestamoPagoService.deletePagoPrestamo(prestamoId, pagoId);
     }
+    @UseGuards(JwtAuthGuard)
+    @Roles(Role.ADMIN, Role.DEUDOR, Role.PRESTAMISTA)
     @Put(':prestamoId/pagos/:pagoId')
     async updatePagoPrestamo(
         @Param('prestamoId') prestamoId: string,

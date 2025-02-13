@@ -116,7 +116,7 @@ export class PrestamoPagoService {
     // Buscar el pago en el historial de pagos y reemplazarlo con el pago actualizado
     const index = prestamo.historialpagos.findIndex((p) => p.id === pagoId);
     if (index === -1) {
-      throw new BusinessLogicException("The pago is not associated with the prestamo", BusinessError.PRECONDITION_FAILED);
+      throw new BusinessLogicException("The pago is not associated with the prestamo"+prestamo.historialpagos, BusinessError.PRECONDITION_FAILED);
     }
   
     // Reemplazar el pago en el historial
